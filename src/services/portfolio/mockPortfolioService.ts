@@ -9,8 +9,10 @@ import type {
   Experience, 
   Skill, 
   PersonalInfo, 
-  ContactForm 
+  ContactForm,
+  Country 
 } from '@/types';
+import { ContactValidationService } from '@/services/validation/contactValidation';
 
 export interface PortfolioRepository {
   getProjects(): Promise<Project[]>;
@@ -19,10 +21,23 @@ export interface PortfolioRepository {
   getSkills(): Promise<Skill[]>;
   getPersonalInfo(): Promise<PersonalInfo>;
   submitContact(data: ContactForm): Promise<void>;
+  getSupportedCountries?(): Country[];
+  detectCountryFromPhone?(phone: string): Country | null;
 }
 
 export class MockPortfolioService implements PortfolioRepository {
   private delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+  private validationService = new ContactValidationService();
+
+  // 🌍 Get supported countries
+  getSupportedCountries(): Country[] {
+    return this.validationService.getCountries();
+  }
+
+  // 🔍 Detect country from phone number
+  detectCountryFromPhone(phone: string): Country | null {
+    return this.validationService.detectCountryFromPhone(phone);
+  }
 
   async getProjects(): Promise<Project[]> {
     await this.delay(800); // Simulate API delay
@@ -232,26 +247,160 @@ export class MockPortfolioService implements PortfolioRepository {
     };
   }
 
+  // 📧 Enhanced submitContact with comprehensive country support
   async submitContact(data: ContactForm): Promise<void> {
     await this.delay(1500); // Simulate form submission delay
     
-    // Simulate validation
-    if (!data.name || data.name.trim().length < 2) {
-      throw new Error('Name must be at least 2 characters long');
+    try {
+      // 1. Enhanced validation with country support
+      const validation = this.validationService.validate(data);
+      
+      if (!validation.isValid) {
+        const errorMessages = Object.values(validation.errors).join(', ');
+        throw new Error(`Validation failed: ${errorMessages}`);
+      }
+
+      // 2. Validate phone number specifically if provided
+      let phoneValidation = null; // 🔧 Define phoneValidation variable
+      if (data.phone && data.country) {
+        phoneValidation = this.validationService.validatePhoneNumber(data.phone, data.country);
+        if (!phoneValidation.isValid) {
+          throw new Error(phoneValidation.error || 'Invalid phone number');
+        }
+      }
+
+      // 3. Get country information
+      const countryInfo = data.country ? this.validationService.getCountryByCode(data.country) : null;
+
+      // 4. Format phone number if valid
+      let formattedData = { ...data };
+      if (phoneValidation && phoneValidation.isValid && phoneValidation.formatted) {
+        formattedData.phone = phoneValidation.formatted;
+      }
+
+      // 5. Enhanced logging with country metadata
+      console.log('🌍 Enhanced Contact Form Submitted:', {
+        submission: {
+          ...formattedData,
+          submissionId: `contact-${Date.now()}`,
+          submissionTime: new Date().toISOString()
+        },
+        country: countryInfo ? {
+          code: countryInfo.code,
+          name: countryInfo.name,
+          flag: countryInfo.flag,
+          dialCode: countryInfo.dialCode
+        } : null,
+        client: {
+          userAgent: typeof navigator !== 'undefined' ? navigator.userAgent : 'Unknown',
+          language: typeof navigator !== 'undefined' ? navigator.language : 'Unknown',
+          timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+          timestamp: Date.now()
+        },
+        validation: {
+          phoneFormatted: !!phoneValidation?.formatted, // 🔧 Fixed reference
+          countryDetected: !!countryInfo,
+          validationPassed: true
+        }
+      });
+
+      // 6. Simulate different response scenarios for testing
+      if (data.email.includes('test')) {
+        console.log('🧪 Test submission detected - Success!');
+        return;
+      }
+
+      if (data.email.includes('error')) {
+        throw new Error('Simulated submission error for testing purposes');
+      }
+
+      if (data.email.includes('slow')) {
+        await this.delay(3000); // Simulate slow response
+        console.log('🐌 Slow submission test completed');
+        return;
+      }
+
+      // 7. Simulate successful submission with country-specific handling
+      if (countryInfo) {
+        console.log(`✅ Contact form submitted successfully from ${countryInfo.flag} ${countryInfo.name}!`);
+        
+        // Simulate country-specific business logic
+        switch (countryInfo.code) {
+          case 'ID':
+            console.log('🇮🇩 Indonesian submission - Using Bahasa Indonesia template');
+            break;
+          case 'US':
+            console.log('🇺🇸 US submission - Using English template');
+            break;
+          case 'SG':
+            console.log('🇸🇬 Singapore submission - Using multi-language template');
+            break;
+          default:
+            console.log(`🌍 International submission from ${countryInfo.name}`);
+        }
+      } else {
+        console.log('✅ Contact form submitted successfully (no country specified)');
+      }
+      
+      // In real implementation, this would:
+      // 1. Save to database with full country metadata
+      // 2. Send email notification with country-specific templates
+      // 3. Track analytics by country and region
+      // 4. Apply country-specific business rules
+      // 5. Queue follow-up actions based on timezone
+      // 6. Integrate with CRM systems
+      // 7. Trigger localized notifications
+      
+      return;
+
+    } catch (error) {
+      // Enhanced error logging
+      console.error('❌ Contact submission failed:', {
+        error: error instanceof Error ? error.message : 'Unknown error',
+        data: { ...data, phone: data.phone ? '***masked***' : undefined },
+        timestamp: new Date().toISOString(),
+        country: data.country
+      });
+      
+      throw error;
     }
+  }
+
+  // 🛠️ Helper method to validate contact data without submitting
+  async validateContactData(data: ContactForm): Promise<{
+    isValid: boolean;
+    errors: Record<string, string>;
+    countryInfo?: Country;
+    formattedPhone?: string;
+  }> {
+    const validation = this.validationService.validate(data);
+    const countryInfo = data.country ? this.validationService.getCountryByCode(data.country) : undefined;
     
-    if (!data.email || !data.email.includes('@')) {
-      throw new Error('Please provide a valid email address');
+    let formattedPhone: string | undefined;
+    if (data.phone && data.country) {
+      const phoneValidation = this.validationService.validatePhoneNumber(data.phone, data.country);
+      if (phoneValidation.isValid && phoneValidation.formatted) {
+        formattedPhone = phoneValidation.formatted;
+      }
     }
+
+    return {
+      isValid: validation.isValid,
+      errors: validation.errors,
+      countryInfo,
+      formattedPhone
+    };
+  }
+
+  // 🌍 Helper method to get country suggestions based on partial input
+  getCountrySuggestions(query: string): Country[] {
+    const countries = this.getSupportedCountries();
+    const searchTerm = query.toLowerCase();
     
-    if (!data.message || data.message.trim().length < 10) {
-      throw new Error('Message must be at least 10 characters long');
-    }
-    
-    // Simulate successful submission
-    console.log('Contact form submitted successfully:', data);
-    
-    // In real implementation, this would send email or save to database
-    return;
+    return countries.filter(country => 
+      country.name.toLowerCase().includes(searchTerm) ||
+      country.code.toLowerCase().includes(searchTerm) ||
+      country.dialCode.includes(searchTerm)
+    ).slice(0, 5); // Limit to 5 suggestions
   }
 }

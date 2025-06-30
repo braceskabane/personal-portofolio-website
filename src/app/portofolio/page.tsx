@@ -1,5 +1,5 @@
 // ================================
-// src/app/page.tsx - MAIN PORTFOLIO PAGE WITH INTEGRATED ANIMATIONS
+// src/app/portofolio/page.tsx - MAIN PORTFOLIO PAGE WITH INTEGRATED ANIMATIONS
 // ================================
 
 'use client';

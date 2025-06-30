@@ -88,6 +88,18 @@ export interface ContactForm {
   message: string;
   phone?: string;
   company?: string;
+  country?: string; 
+}
+
+// Country interface for contact validation
+export interface Country {
+  code: string;
+  name: string;
+  flag: string;
+  dialCode: string;
+  phonePattern: RegExp;
+  phoneExample: string;
+  maxLength: number;
 }
 
 // Personal information interface

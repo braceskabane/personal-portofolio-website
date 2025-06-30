@@ -38,11 +38,11 @@ export class ParticleService {
 
   constructor(config: Partial<ParticleSystemConfig> = {}) {
     this.config = {
-      particleCount: 50,
+      particleCount: 100,
       colors: ['#06b6d4', '#8b5cf6', '#ec4899', '#10b981'],
       minSize: 1,
       maxSize: 3,
-      speed: 0.5,
+      speed: 2,
       opacity: 0.6,
       enableMouse: true,
       mouseRadius: 100,

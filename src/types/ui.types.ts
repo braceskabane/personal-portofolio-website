@@ -190,3 +190,15 @@ export interface CommonComponentProps extends WithChildren, WithClassName, WithS
   id?: string;
   'data-testid'?: string;
 }
+
+export interface CountrySelectProps {
+  value?: string;
+  onChange: (countryCode: string) => void;
+  placeholder?: string;
+  className?: string;
+  error?: string;
+  disabled?: boolean;
+  label?: string;
+  required?: boolean;
+}
+

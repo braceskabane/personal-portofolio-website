@@ -18,3 +18,7 @@ export type { Particle, ParticleSystemConfig } from './animation/particleService
 // Validation Services
 export { ContactValidationService } from './validation/contactValidation';
 export type { ValidationRule, ValidationResult } from './validation/contactValidation';
+
+// AI Services
+export { EnhancedGeminiService } from './ai/geminiService';
+export type { GeminiConfig } from './ai/geminiService';

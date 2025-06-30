@@ -8,7 +8,8 @@ import type {
     Experience, 
     Skill, 
     PersonalInfo, 
-    ContactForm 
+    ContactForm, 
+    Country 
   } from './portfolio.types';
   
   // HTTP methods
@@ -56,6 +57,16 @@ import type {
     getSkills(): Promise<Skill[]>;
     getPersonalInfo(): Promise<PersonalInfo>;
     submitContact(data: ContactForm): Promise<void>;
+    getSupportedCountries?(): Country[];
+    detectCountryFromPhone?(phone: string): Country | null;
+  }
+
+  // validation interfaces
+  export interface ContactValidationResult {
+    isValid: boolean;
+    errors: Record<string, string>;
+    formattedData?: ContactForm;
+    countryInfo?: Country;
   }
   
   export interface CacheRepository {
@@ -75,6 +86,7 @@ import type {
     trackEvent(event: string, data?: any): void;
     trackPageView(page: string): void;
     trackError(error: Error): void;
+    trackContactSubmission(country?: string): void;
   }
   
   // Authentication (for admin features)
@@ -84,6 +96,7 @@ import type {
     name: string;
     role: UserRole;
     avatar?: string;
+    country?: string;
   }
   
   export type UserRole = 'admin' | 'user' | 'guest';

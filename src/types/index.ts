@@ -8,3 +8,4 @@ export * from './ui.types';
 export * from './api.types';
 export * from './utils.types';
 export * from './events.types';
+export * from './language.types';
