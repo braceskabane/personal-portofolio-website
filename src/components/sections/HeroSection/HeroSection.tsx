@@ -9,12 +9,18 @@ import { ChevronDown, Mail, Download, Github, Linkedin } from 'lucide-react';
 import { Button, Card } from '@/components/ui';
 import { useIntersectionObserver } from '@/hooks';
 import type { HeroSectionProps } from './HeroSection.types';
+import { 
+  MinimalAICTA, 
+  ModernChipCTA, 
+  IconButtonCTA 
+} from '@/components/common/MinimalAICTA/MinimalAICTA';
 
 export const HeroSection: React.FC<HeroSectionProps> = ({
   personalInfo,
   loading = false,
   onContactClick,
-  onDownloadCV
+  onDownloadCV,
+  onOpenChat
 }) => {
   const { ref, isIntersecting } = useIntersectionObserver({
     threshold: 0.5,
@@ -158,6 +164,14 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             </Button>
           </div>
 
+          {/* {onOpenChat && (
+            <div className={`mb-16 transition-all duration-1000 delay-800 ${
+              isIntersecting ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
+            }`}>
+              <MinimalAICTA onOpenChat={onOpenChat} />
+            </div>
+          )} */}
+
           {/* Social Links */}
           {personalInfo?.social && (
             <div className={`flex justify-center gap-4 mb-16 transition-all duration-1000 delay-700 ${
@@ -187,7 +201,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           )}
 
           {/* Scroll Indicator */}
-          <div className={`animate-bounce transition-all duration-1000 delay-800 ${
+          <div className={`animate-bounce transition-all duration-1000 delay-900 ${
             isIntersecting ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
           }`}>
             <ChevronDown size={32} className="mx-auto text-cyan-400" />

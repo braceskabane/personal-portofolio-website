@@ -16,6 +16,7 @@ import {
   ContactSection
 } from '@/components/sections';
 import { BackToTop, LoadingScreen, SectionDivider } from '@/components/common';
+import { SmartFloatingActions } from '@/components/common/SmartFloatingActions';
 
 // Navigation Component
 const Navigation: React.FC<{ activeSection: string }> = ({ activeSection }) => {
@@ -188,6 +189,7 @@ const ScrollProgress: React.FC = () => {
 // Main Portfolio Component with Loading Screen and Section Dividers
 export default function Portfolio() {
   const [isLoading, setIsLoading] = useState(true);
+  const [isChatOpen, setIsChatOpen] = useState(false);
   
   // Initialize portfolio service
   const mockPortfolioService = new MockPortfolioService();
@@ -258,6 +260,16 @@ export default function Portfolio() {
     }
   };
 
+  const handleOpenChat = () => {
+    console.log('Opening chat...'); // Debug log
+    setIsChatOpen(true);
+  };
+
+  const handleToggleChat = () => {
+    console.log('Toggling chat, current state:', isChatOpen); // Debug log
+    setIsChatOpen(!isChatOpen);
+  };
+
   return (
     <div className="min-h-screen bg-black text-white overflow-x-hidden">
       {/* Particle Background */}
@@ -280,6 +292,7 @@ export default function Portfolio() {
           loading={loading.personalInfo}
           onContactClick={handleContactClick}
           onDownloadCV={handleDownloadCV}
+          onOpenChat={handleOpenChat}
         />
         
         {/* Section Divider - Wave */}
@@ -332,9 +345,13 @@ export default function Portfolio() {
         />
       </main>
 
-      {/* Back to Top Button */}
-      <BackToTop />
-
+      {/* GANTI BackToTop dengan SmartFloatingActions */}
+      <SmartFloatingActions 
+        portfolioData={{ personalInfo, skills, projects, experience }}
+        isChatOpen={isChatOpen}
+        onChatToggle={handleToggleChat}
+      />
+      
       {/* Footer */}
       <footer className="relative z-10 py-12 bg-gray-900/80 backdrop-blur-xl border-t border-gray-800">
         <div className="container mx-auto px-6">

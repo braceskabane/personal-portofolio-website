@@ -9,4 +9,5 @@ export interface HeroSectionProps {
   loading?: boolean;
   onContactClick: () => void;
   onDownloadCV: () => void;
+  onOpenChat?: () => void; // ← TAMBAHKAN HANYA INI
 }

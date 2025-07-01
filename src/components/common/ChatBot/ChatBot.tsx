@@ -1,5 +1,10 @@
 // ================================
-// src/components/common/ChatBot/ChatBot.tsx (UPDATED - Integration with Hooks)
+// SOLUTION: Fix ChatBot Component Conflict
+// ================================
+
+// ================================
+// OPTION 1: Update ChatBot Component (Recommended)
+// File: src/components/common/ChatBot/ChatBot.tsx
 // ================================
 
 'use client';
@@ -19,6 +24,7 @@ interface MultilingualChatBotProps extends ChatBotProps {
   defaultLanguage?: SupportedLanguage;
   enableLanguageSwitch?: boolean;
   enableAutoLanguageDetection?: boolean;
+  showFloatingButton?: boolean; // ← TAMBAH PROP INI
 }
 
 const MultilingualChatBot: React.FC<MultilingualChatBotProps> = ({ 
@@ -29,7 +35,8 @@ const MultilingualChatBot: React.FC<MultilingualChatBotProps> = ({
   apiKey,
   defaultLanguage = 'en',
   enableLanguageSwitch = true,
-  enableAutoLanguageDetection = true
+  enableAutoLanguageDetection = true,
+  showFloatingButton = true // ← DEFAULT TRUE untuk backward compatibility
 }) => {
   const [showLanguageMenu, setShowLanguageMenu] = useState(false);
   const [inputMessage, setInputMessage] = useState('');
@@ -48,7 +55,7 @@ const MultilingualChatBot: React.FC<MultilingualChatBotProps> = ({
     defaultLanguage,
     enableAutoLanguageDetection,
     config: {
-      debug: process.env.NODE_ENV === 'development', // Enable debug in development
+      debug: process.env.NODE_ENV === 'development',
       model: 'gemini-1.5-flash',
       temperature: 0.7,
       maxTokens: 1000
@@ -101,8 +108,8 @@ const MultilingualChatBot: React.FC<MultilingualChatBotProps> = ({
     }
   };
 
-  // Chat toggle button when closed
-  if (!isOpen) {
+  // ← FIX: Hanya render floating button jika showFloatingButton = true
+  if (!isOpen && showFloatingButton) {
     return (
       <div className={`fixed bottom-6 right-6 z-50 ${className}`}>
         <Button
@@ -115,6 +122,11 @@ const MultilingualChatBot: React.FC<MultilingualChatBotProps> = ({
         </Button>
       </div>
     );
+  }
+
+  // ← FIX: Jika closed dan showFloatingButton = false, return null
+  if (!isOpen && !showFloatingButton) {
+    return null;
   }
 
   const currentLangConfig = getLanguageConfig(currentLanguage);
