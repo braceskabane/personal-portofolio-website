@@ -1,0 +1,41 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Contact {
+  id          String   @id @default(cuid())
+  name        String
+  email       String
+  subject     String
+  message     String
+  phone       String?
+  company     String?
+  country     String   @default("ID")
+  
+  // System fields
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  // Status: NEW, IN_PROGRESS, RESPONDED, CLOSED, SPAM
+  status      String   @default("NEW")
+  
+  // Priority: LOW, MEDIUM, HIGH, URGENT  
+  priority    String   @default("MEDIUM")
+  
+  // Additional fields
+  tags        String   @default("")  // JSON string for array tags
+  notes       String?
+  assignedTo  String?
+  responseAt  DateTime?
+  
+  // Metadata
+  ipAddress   String?
+  userAgent   String?
+
+  @@map("contacts")
+}
