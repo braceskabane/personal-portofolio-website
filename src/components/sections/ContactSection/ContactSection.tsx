@@ -15,6 +15,8 @@ import { useIntersectionObserver } from '@/hooks';
 import { ContactValidationService } from '@/services';
 import type { ContactSectionProps } from './ContactSection.types';
 import type { ContactForm } from '@/types';
+import type { ContactFormData } from '@/services/api/contactService';
+import { contactService } from '@/services/api/contactService';
 
 export const ContactSection: React.FC<ContactSectionProps> = ({
   personalInfo,
@@ -34,7 +36,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
     message: '',
     phone: '',
     company: '',
-    country: 'ID' // Default to Indonesia
+    country: 'ID'
   });
 
   const [validationErrors, setValidationErrors] = useState<Record<string, string>>({});
@@ -108,11 +110,12 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
   };
 
   // Enhanced form submission
+  // Submit contact form to backend API
   const handleSubmit = async () => {
     setIsSubmitting(true);
     setSubmitStatus('idle');
     setSubmitMessage('');
-
+  
     try {
       // Comprehensive validation
       const validation = validationService.validate(contactForm);
@@ -123,37 +126,44 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
         setSubmitMessage('Please fix the validation errors and try again.');
         return;
       }
-
+  
       // Clear validation errors
       setValidationErrors({});
-
-      // Submit with enhanced data
-      const success = await onSubmitContact(contactForm);
+  
+      // Submit to backend API
+      const contactData: ContactFormData = {
+        name: contactForm.name,
+        email: contactForm.email,
+        subject: contactForm.subject ?? '',
+        message: contactForm.message,
+        phone: contactForm.phone ?? '',
+        company: contactForm.company ?? '',
+        country: contactForm.country ?? ''
+      };
       
-      if (success) {
-        setSubmitStatus('success');
-        const country = validationService.getCountryByCode(contactForm.country || '');
-        setSubmitMessage(
-          `Thank you for your message! I'll get back to you soon. ${
-            country ? `Greetings from ${country.flag} ${country.name}!` : ''
-          }`
-        );
-        
-        // Reset form
-        setContactForm({
-          name: '',
-          email: '',
-          subject: '',
-          message: '',
-          phone: '',
-          company: '',
-          country: 'ID'
-        });
-        setValidationErrors({});
-      } else {
-        setSubmitStatus('error');
-        setSubmitMessage('Failed to send message. Please try again.');
-      }
+      const contact = await contactService.submitContact(contactData);      
+      
+      // Success handling
+      setSubmitStatus('success');
+      const country = validationService.getCountryByCode(contactForm.country || '');
+      setSubmitMessage(
+        `Thank you for your message! I'll get back to you soon. ${
+          country ? `Greetings from ${country.flag} ${country.name}!` : ''
+        }`
+      );
+      
+      // Reset form
+      setContactForm({
+        name: '',
+        email: '',
+        subject: '',
+        message: '',
+        phone: '',
+        company: '',
+        country: 'ID'
+      });
+      setValidationErrors({});
+  
     } catch (error) {
       setSubmitStatus('error');
       setSubmitMessage(error instanceof Error ? error.message : 'An unexpected error occurred.');

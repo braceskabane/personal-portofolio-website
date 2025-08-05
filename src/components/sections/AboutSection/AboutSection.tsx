@@ -20,9 +20,9 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
   });
 
   const quickFacts = [
-    { icon: <Code className="text-cyan-400" size={20} />, label: 'Projects Completed', value: '50+' },
-    { icon: <Users className="text-purple-400" size={20} />, label: 'Happy Clients', value: '30+' },
-    { icon: <Award className="text-yellow-400" size={20} />, label: 'Years Experience', value: '5+' },
+    { icon: <Code className="text-cyan-400" size={20} />, label: 'Projects Completed', value: '4+' },
+    { icon: <Users className="text-purple-400" size={20} />, label: 'Happy Clients', value: '1+' },
+    { icon: <Award className="text-yellow-400" size={20} />, label: 'Years Experience', value: '1+' },
     { icon: <Coffee className="text-orange-400" size={20} />, label: 'Coffee Cups', value: '∞' }
   ];
 
@@ -53,18 +53,18 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
             isIntersecting ? 'translate-x-0 opacity-100' : '-translate-x-10 opacity-0'
           }`}>
             <div className="space-y-4">
-              <p className="text-lg text-gray-300 leading-relaxed">
+              <p className="text-lg text-gray-300 leading-relaxed text-justify">
                 {personalInfo?.description || 
-                  `With over 5 years of experience in full-stack development, I specialize in creating 
-                  robust, scalable applications using modern technologies. My passion lies in bridging 
-                  the gap between design and functionality.`
+                  `Fresh graduate Mobile Application Developer with hands-on experience in Android development 
+                  and machine learning integration. Specialized in building scalable mobile applications using 
+                  Kotlin, MVVM architecture, and modern Android technologies.`
                 }
               </p>
               
-              <p className="text-lg text-gray-300 leading-relaxed">
-                I believe in continuous learning and staying at the forefront of technology trends. 
-                When I'm not coding, you'll find me exploring new frameworks, contributing to open source, 
-                or mentoring aspiring developers.
+              <p className="text-lg text-gray-300 leading-relaxed text-justify">
+                Passionate about continuous learning and staying current with mobile development trends. 
+                Recently completed industry-level training programs and contributed to cross-functional 
+                teams developing innovative mobile solutions with AI/ML capabilities.
               </p>
             </div>
 
@@ -87,7 +87,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
                   <Calendar className="text-cyan-400" size={20} />
                   <div>
                     <p className="text-gray-400 text-sm">Experience</p>
-                    <p className="text-white font-semibold">5+ Years</p>
+                    <p className="text-white font-semibold">1+ Year</p>
                   </div>
                 </div>
               </Card>
@@ -130,7 +130,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
                   Core Expertise
                 </h4>
                 <div className="flex flex-wrap justify-center gap-2">
-                  {['React', 'Next.js', 'TypeScript', 'Node.js', 'Python', 'AWS'].map((skill, index) => (
+                  {['Kotlin', 'Android SDK', 'ML Kit', 'Firebase', 'Python', 'TensorFlow Lite'].map((skill, index) => (
                     <span
                       key={index}
                       className="px-3 py-1 bg-cyan-400/10 text-cyan-400 rounded-full text-sm font-medium hover:bg-cyan-400/20 transition-colors cursor-default"

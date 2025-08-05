@@ -41,7 +41,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
   return (
     <section 
       id="hero" 
-      className="min-h-screen flex items-center justify-center relative overflow-hidden"
+      className="min-h-screen flex items-center justify-center relative overflow-hidden pt-20"
+      style={{ minHeight: 'calc(100vh - 0px)' }}
     >
       {/* Background Effects */}
       <div className="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-black to-cyan-900/20" />
@@ -125,7 +126,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           </div>
           
           {/* Description */}
-          <div className={`mb-12 transition-all duration-1000 delay-400 ${
+          {/* <div className={`mb-12 transition-all duration-1000 delay-400 ${
             isIntersecting ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
           }`}>
             <p className="text-lg md:text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
@@ -133,7 +134,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 'Passionate about creating scalable solutions that make a difference. Specialized in modern web technologies and user experience design.'
               }
             </p>
-          </div>
+          </div> */}
 
           {/* Action Buttons */}
           <div className={`flex flex-col sm:flex-row gap-4 justify-center mb-12 transition-all duration-1000 delay-600 ${

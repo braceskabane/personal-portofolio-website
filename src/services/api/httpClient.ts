@@ -1,5 +1,5 @@
 // ================================
-// src/services/api/httpClient.ts
+// CORRECTED: src/services/api/httpClient.ts
 // ================================
 
 'use client';

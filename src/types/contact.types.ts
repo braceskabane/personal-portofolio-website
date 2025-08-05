@@ -2,6 +2,10 @@
 // src/types/contact.types.ts (Update ContactForm)
 // ================================
 
+import type { ContactFormData } from '@/services/api/contactService';
+
+export type ContactFormBackend = ContactFormData;
+
 export interface ContactForm {
     name: string;
     email: string;

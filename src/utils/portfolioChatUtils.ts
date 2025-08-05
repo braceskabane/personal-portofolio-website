@@ -19,13 +19,13 @@ export class PortfolioChatUtils {
     const { personalInfo, skills = [], projects = [], experience = [] } = portfolioData;
 
     return {
-      name: personalInfo?.name || "Muhammad Daffa Fisabilillah",
-      title: personalInfo?.title || "Senior Full Stack Developer & UI/UX Designer",
+      name: personalInfo?.name || "Muhammad Daffa' Fisabilillah",
+      title: personalInfo?.title || "Mobile Application Developer & Android Specialist",
       experience: this.buildExperienceText(personalInfo, experience),
       skills: this.buildSkillsList(skills),
       projects: this.buildProjectsList(projects),
       contact: this.buildContactInfo(personalInfo),
-      background: personalInfo?.description || "Passionate about creating scalable solutions and mentoring development teams."
+      background: personalInfo?.description || "Mobile Application Developer with strong foundations in Android development, machine learning integration, and real-time computer vision."
     };
   }
 
@@ -75,6 +75,6 @@ export class PortfolioChatUtils {
     
     return parts.length > 0 
       ? parts.join(', ')
-      : "Email: daffa.fisabilillah@example.com, Location: Jakarta, Indonesia";
+      : "Email: mydaffa2003@gmail.com, Location: Surabaya, Indonesia";
   }
 }

@@ -61,11 +61,10 @@ export type EmploymentType =
 // Skill interface
 export interface Skill {
   name: string;
-  level: number; // 0-100
+  projectCount: number; // Number of projects using this skill
   category: SkillCategory;
   icon?: string;
   description?: string;
-  yearsOfExperience?: number;
 }
 
 export type SkillCategory = 
