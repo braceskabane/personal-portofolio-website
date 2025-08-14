@@ -20,6 +20,8 @@ import { SmartFloatingActions } from '@/components/common/SmartFloatingActions';
 
 // Navigation Component
 const Navigation: React.FC<{ activeSection: string }> = ({ activeSection }) => {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  
   const navigationItems = [
     { id: 'hero', label: 'Home' },
     { id: 'about', label: 'About' },
@@ -33,47 +35,183 @@ const Navigation: React.FC<{ activeSection: string }> = ({ activeSection }) => {
     const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
+      // Close mobile menu after clicking
+      setIsMobileMenuOpen(false);
     }
   };
 
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+
+  // Close mobile menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as HTMLElement;
+      if (isMobileMenuOpen && !target.closest('.mobile-menu') && !target.closest('.mobile-menu-button')) {
+        setIsMobileMenuOpen(false);
+      }
+    };
+
+    const handleEscapeKey = (event: KeyboardEvent) => {
+      if (event.key === 'Escape' && isMobileMenuOpen) {
+        setIsMobileMenuOpen(false);
+      }
+    };
+
+    if (isMobileMenuOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+      document.addEventListener('keydown', handleEscapeKey);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('keydown', handleEscapeKey);
+    };
+  }, [isMobileMenuOpen]);
+
+  // Prevent body scroll when mobile menu is open
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isMobileMenuOpen]);
+
   return (
-    <nav className="fixed top-0 w-full z-50 bg-black/80 backdrop-blur-xl border-b border-gray-800">
-      <div className="container mx-auto px-6 py-4">
-        <div className="flex justify-between items-center">
-          {/* Logo */}
-          <div 
-            onClick={() => scrollToSection('hero')}
-            className="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent cursor-pointer hover:scale-105 transition-transform"
-          >
-            Portfolio
+    <>
+      <nav className="fixed top-0 w-full z-50 bg-black/80 backdrop-blur-xl border-b border-gray-800">
+        <div className="container mx-auto px-6 py-4">
+          <div className="flex justify-between items-center h-12">
+            {/* Logo */}
+            <div 
+              onClick={() => scrollToSection('hero')}
+              className="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent cursor-pointer hover:scale-105 transition-transform"
+            >
+              Portfolio
+            </div>
+            
+            {/* Desktop Navigation */}
+            <div className="hidden md:flex space-x-8">
+              {navigationItems.map((item) => (
+                <button
+                  key={item.id}
+                  onClick={() => scrollToSection(item.id)}
+                  className={`transition-all duration-300 hover:text-cyan-400 ${
+                    activeSection === item.id 
+                      ? 'text-cyan-400 font-semibold' 
+                      : 'text-gray-300'
+                  }`}
+                >
+                  {item.label}
+                </button>
+              ))}
+            </div>
+
+            {/* Mobile Menu Button */}
+            <button 
+              className="md:hidden text-white mobile-menu-button relative z-50 flex items-center justify-center w-10 h-10"
+              onClick={toggleMobileMenu}
+              aria-label="Toggle mobile menu"
+            >
+              <div className="w-6 h-6 relative flex flex-col justify-center">
+                <span className={`absolute block w-6 h-0.5 bg-current transform transition duration-300 ease-in-out ${
+                  isMobileMenuOpen ? 'rotate-45' : '-translate-y-1.5'
+                }`} />
+                <span className={`absolute block w-6 h-0.5 bg-current transform transition duration-300 ease-in-out ${
+                  isMobileMenuOpen ? 'opacity-0' : 'opacity-100'
+                }`} />
+                <span className={`absolute block w-6 h-0.5 bg-current transform transition duration-300 ease-in-out ${
+                  isMobileMenuOpen ? '-rotate-45' : 'translate-y-1.5'
+                }`} />
+              </div>
+            </button>
           </div>
-          
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex space-x-8">
-            {navigationItems.map((item) => (
+        </div>
+      </nav>
+
+      {/* Mobile Menu Overlay */}
+      {isMobileMenuOpen && (
+        <div 
+          className="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm md:hidden transition-opacity duration-300" 
+          onClick={toggleMobileMenu}
+        />
+      )}
+
+      {/* Mobile Menu Sidebar */}
+      <div className={`fixed top-0 right-0 w-80 max-w-[85vw] h-full z-50 bg-gradient-to-br from-gray-900/98 via-black/95 to-gray-900/98 backdrop-blur-xl border-l border-gray-700/50 shadow-2xl transform transition-all duration-300 ease-out md:hidden mobile-menu ${
+        isMobileMenuOpen ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'
+      }`}>
+        <div className="flex flex-col h-full">
+          {/* Mobile Menu Items */}
+          <div className="flex-1 pt-24 pb-8">
+            {navigationItems.map((item, index) => (
               <button
                 key={item.id}
                 onClick={() => scrollToSection(item.id)}
-                className={`transition-all duration-300 hover:text-cyan-400 ${
+                className={`w-full text-left px-8 py-6 text-xl font-medium transition-all duration-300 hover:bg-gradient-to-r hover:from-cyan-400/10 hover:to-purple-500/10 hover:text-cyan-400 relative group ${
                   activeSection === item.id 
-                    ? 'text-cyan-400 font-semibold' 
+                    ? 'text-cyan-400 bg-gradient-to-r from-cyan-400/20 to-purple-500/20' 
                     : 'text-gray-300'
                 }`}
+                style={{ 
+                  animationDelay: `${index * 100}ms`,
+                  transform: isMobileMenuOpen ? 'translateX(0)' : 'translateX(30px)',
+                  opacity: isMobileMenuOpen ? 1 : 0,
+                  transition: `all 0.5s cubic-bezier(0.4, 0, 0.2, 1) ${index * 100}ms`
+                }}
               >
-                {item.label}
+                <div className="flex items-center justify-between">
+                  <span className="tracking-wide">{item.label}</span>
+                  <div className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                    activeSection === item.id 
+                      ? 'bg-cyan-400 scale-100' 
+                      : 'bg-gray-600 scale-0 group-hover:scale-100 group-hover:bg-cyan-400'
+                  }`} />
+                </div>
+                
+                {/* Active indicator line */}
+                <div className={`absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-cyan-400 to-purple-500 transition-all duration-300 ${
+                  activeSection === item.id ? 'opacity-100' : 'opacity-0'
+                }`} />
+                
+                {/* Hover effect background */}
+                <div className="absolute inset-0 bg-gradient-to-r from-cyan-400/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </button>
             ))}
           </div>
 
-          {/* Mobile Menu Button */}
-          <button className="md:hidden text-white">
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
-          </button>
+          {/* Mobile Menu Footer */}
+          <div className="p-8 border-t border-gray-700/30 bg-gradient-to-r from-gray-800/20 to-gray-900/20">
+            <div className="text-center space-y-4">
+              <div className="w-16 h-16 mx-auto rounded-full bg-gradient-to-br from-cyan-400 to-purple-500 p-0.5 shadow-lg">
+                <div className="w-full h-full rounded-full bg-gray-900 flex items-center justify-center">
+                  <span className="text-xl font-bold bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">
+                    MDF
+                  </span>
+                </div>
+              </div>
+              <div className="space-y-1">
+                <p className="text-sm font-medium text-white">
+                  Muhammad Daffa' Fisabilillah
+                </p>
+                <p className="text-xs text-gray-400">
+                  Mobile Application Developer
+                </p>
+              </div>
+              <div className="flex justify-center">
+                <div className="w-12 h-0.5 bg-gradient-to-r from-cyan-400 to-purple-500 rounded-full opacity-60"></div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </nav>
+    </>
   );
 };
 

@@ -65,6 +65,11 @@ export const Button: React.FC<ButtonProps> = ({
   };
 
   const renderContent = () => {
+    // If no children, just render icon (icon-only button)
+    if (!children) {
+      return renderIcon();
+    }
+
     if (iconPosition === 'right') {
       return (
         <>

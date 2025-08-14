@@ -291,7 +291,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
               variant="primary"
               fullWidth
               icon={<Github size={20} />}
-              onClick={() => window.open('https://github.com/johndoe', '_blank')}
+              onClick={() => window.open('https://github.com/braceskabane', '_blank')}
             >
               View All Projects
             </Button>

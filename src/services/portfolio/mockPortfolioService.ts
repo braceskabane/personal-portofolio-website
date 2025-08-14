@@ -49,8 +49,8 @@ export class MockPortfolioService implements PortfolioRepository {
         description: 'Android fitness app offering real-time posture correction and motion analysis using ML Kit Pose Detection API and KNN classifier. Built custom motion classifier on 33 3D skeletal points with CSV dataset and Exponential Moving Average smoothing.',
         technologies: ['Kotlin', 'ML Kit', 'CameraX', 'Dagger Hilt', 'Jetpack Navigation', 'Firebase', 'CSV Parsing', 'KNN Classifier'],
         imageUrl: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&h=400&fit=crop',
-        demoUrl: 'https://github.com/braceskabane/baki-demo',
-        githubUrl: 'https://github.com/braceskabane/baki-sport-detector',
+        demoUrl: '/projects/demo-soon?project=baki',
+        githubUrl: 'https://github.com/braceskabane/Proyek_Telematika.git',
         stats: { accuracy: '92%', speed: '30fps', performance: '3 months' },
         featured: true,
         category: 'mobile-app'
@@ -61,8 +61,8 @@ export class MockPortfolioService implements PortfolioRepository {
         description: 'Custom CNN with residual blocks and Mixup data augmentation to classify 10 dog breeds with high accuracy. Optimized model for mobile deployment through PyTorch → ONNX → TensorFlow → TFLite pipeline with full offline capability.',
         technologies: ['PyTorch', 'ONNX', 'TensorFlow Lite', 'Kotlin', 'Room', 'Android Studio', 'CNN', 'Data Augmentation'],
         imageUrl: 'https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=600&h=400&fit=crop',
-        demoUrl: 'https://github.com/braceskabane/dogvision-demo',
-        githubUrl: 'https://github.com/braceskabane/dogvision-classifier',
+        demoUrl: '/projects/demo-soon?project=dogvision',
+        githubUrl: 'https://github.com/braceskabane/Dog_Classification.git',
         stats: { accuracy: '94%', dataPoints: '10 breeds', performance: '3 months' },
         featured: true,
         category: 'mobile-app'
@@ -73,8 +73,8 @@ export class MockPortfolioService implements PortfolioRepository {
         description: 'Photorealistic avatar for virtual musician using Unreal Engine 5 and Metahuman, enabling immersive concert performance in 3D environment. Integrated motion capture systems and achieved natural motion synchronization.',
         technologies: ['Unreal Engine 5', 'Metahuman', 'Move AI', 'Rokoko', 'DeepMotion', 'Live Link Face', 'Marvelous Designer', 'MediaPipe'],
         imageUrl: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=600&h=400&fit=crop',
-        demoUrl: 'https://github.com/braceskabane/digital-twin-demo',
-        githubUrl: 'https://github.com/braceskabane/metahuman-concert',
+        demoUrl: undefined, // No GitHub repository available
+        githubUrl: undefined, // No GitHub repository available
         stats: {  speed: '30fps', accuracy: '95%', performance: '3 months' },
         featured: true,
         category: 'desktop-app'
@@ -85,8 +85,8 @@ export class MockPortfolioService implements PortfolioRepository {
         description: 'Terminal-based game with webcam card recognition using custom CNN model and real-time prediction with OpenCV. Implemented preprocessing pipeline with thresholding, perspective transform, and label prediction using Keras.',
         technologies: ['Python', 'Keras', 'OpenCV', 'NumPy', 'CNN', 'Computer Vision', 'Real-time Processing'],
         imageUrl: 'https://images.unsplash.com/photo-1606092195730-5d7b9af1efc5?w=600&h=400&fit=crop',
-        demoUrl: 'https://github.com/braceskabane/card-game-demo',
-        githubUrl: 'https://github.com/braceskabane/playing-card-classifier',
+        demoUrl: '/projects/demo-soon?project=mini-game',
+        githubUrl: 'https://github.com/braceskabane/Playing-Card-with-Convolutional-Neural-Network.git',
         stats: { accuracy: '88%', dataPoints: '52 cards', performance: '3 months' },
         featured: false,
         category: 'desktop-app'
