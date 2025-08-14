@@ -209,13 +209,13 @@ export class MockPortfolioService implements PortfolioRepository {
       email: 'mydaffa2003@gmail.com',
       phone: '+62 822 8924 7001',
       location: 'Surabaya, Indonesia',
-      website: 'https://yourwebsite.com',
+      website: 'https://dav-portofolio.vercel.app',
       resume: '/resume-daffa-fisabilillah.pdf',
       social: {
         github: 'https://github.com/braceskabane',
         linkedin: 'https://linkedin.com/in/muhammaddaffafisabilillah',
         twitter: 'https://twitter.com/daffafisabilillah',
-        instagram: 'https://instagram.com/daffafisabilillah',
+        instagram: 'https://instagram.com/braceskabane',
         youtube: 'https://youtube.com/@daffafisabilillah',
         behance: 'https://behance.net/daffafisabilillah',
         dribbble: 'https://dribbble.com/daffafisabilillah'

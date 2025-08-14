@@ -256,17 +256,17 @@ const MultilingualChatBot: React.FC<MultilingualChatBotProps> = ({
           </div>
         )}
 
-        {/* Input */}
+        {/* Input - Fixed for Mobile Responsiveness */}
         <div className="p-3 md:p-4 border-t border-gray-700 bg-gray-800/30">
           <div className="flex space-x-2">
-            <div className="flex-1">
+            <div className="flex-1 min-w-0">
               <Input
                 placeholder={getTranslation('ui.placeholder', currentLanguage)}
                 value={inputMessage}
                 onChange={(e) => setInputMessage(e.target.value)}
                 onKeyPress={handleKeyPress}
                 disabled={isLoading}
-                className="text-sm h-10"
+                className="text-sm h-10 w-full resize-none overflow-hidden"
               />
             </div>
             <Button

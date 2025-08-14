@@ -6,7 +6,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { 
-  Mail, Phone, MapPin, Send, Github, Linkedin, Twitter, ExternalLink, 
+  Mail, Phone, MapPin, Send, Github, Linkedin, Instagram, ExternalLink, 
   Download, Globe, CheckCircle, AlertCircle, Clock, Users 
 } from 'lucide-react';
 import { Button, Card, Input } from '@/components/ui';
@@ -58,10 +58,10 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
       color: 'hover:bg-blue-600'
     },
     {
-      name: 'Twitter',
-      url: personalInfo?.social?.twitter,
-      icon: Twitter,
-      color: 'hover:bg-blue-500'
+      name: 'Instagram',
+      url: 'https://instagram.com/braceskabane',
+      icon: Instagram,
+      color: 'hover:bg-pink-500'
     }
   ].filter(link => link.url);
 
@@ -199,7 +199,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
             </div>
             <div className="flex items-center space-x-2">
               <Users size={16} className="text-pink-400" />
-              <span>50+ Happy Clients</span>
+              <span>1+ Happy Clients</span>
             </div>
           </div>
         </div>
