@@ -381,12 +381,6 @@ export default function Portfolio() {
   const handleDownloadCV = () => {
     if (personalInfo?.resume) {
       window.open(personalInfo.resume, '_blank');
-    } else {
-      // Create a download link for demo
-      const link = document.createElement('a');
-      link.href = '/resume-john-doe.pdf';
-      link.download = `${personalInfo?.name || 'john-doe'}-resume.pdf`;
-      link.click();
     }
   };
 
@@ -496,7 +490,7 @@ export default function Portfolio() {
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="text-center md:text-left mb-4 md:mb-0">
               <p className="text-gray-400">
-                © 2025 {personalInfo?.name || 'John Doe'}. All rights reserved.
+                © 2025 {personalInfo?.name || 'Muhammad Daffa\' Fisabilillah'}. All rights reserved.
               </p>
               <p className="text-sm text-gray-500">
                 Built with Next.js, TypeScript, Tailwind CSS & ❤️
