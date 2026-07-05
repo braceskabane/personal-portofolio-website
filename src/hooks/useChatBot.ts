@@ -44,11 +44,11 @@ export const useMultilingualChatBot = ({
   useEffect(() => {
     if (apiKey) {
       try {
-        geminiServiceRef.current = new EnhancedGeminiService({ // ✅ Gunakan EnhancedGeminiService
+        geminiServiceRef.current = new EnhancedGeminiService({
           apiKey,
-          model: 'gemini-1.5-flash',
+          model: process.env.NEXT_PUBLIC_GEMINI_MODEL || 'gemini-2.5-flash',
           temperature: 0.7,
-          maxTokens: 1000,
+          maxTokens: 8192,
           defaultLanguage: currentLanguage,
           debug: true,
           ...config
@@ -62,31 +62,7 @@ export const useMultilingualChatBot = ({
       console.warn('⚠️ No API key provided, using fallback responses');
       geminiServiceRef.current = null;
     }
-  }, [apiKey, config, currentLanguage]);
-
-  // Initialize Gemini service when API key is provided
-  useEffect(() => {
-    if (apiKey) {
-      try {
-        geminiServiceRef.current = new EnhancedGeminiService({
-          apiKey,
-          model: 'gemini-1.5-flash',
-          temperature: 0.7,
-          maxTokens: 1000,
-          defaultLanguage: currentLanguage,
-          debug: true, // Enable debug for troubleshooting
-          ...config
-        });
-        console.log('✅ Gemini service initialized successfully');
-      } catch (error) {
-        console.error('❌ Failed to initialize Gemini service:', error);
-        geminiServiceRef.current = null;
-      }
-    } else {
-      console.warn('⚠️ No API key provided, using fallback responses');
-      geminiServiceRef.current = null;
-    }
-  }, [apiKey, config, currentLanguage]);
+  }, [apiKey, currentLanguage]);
 
   const generateMultilingualMockResponse = useCallback(async (userMessage: string, language: SupportedLanguage): Promise<string> => {
     // Simulate API delay

@@ -2,34 +2,37 @@
 // src/components/sections/HeroSection/HeroSection.tsx
 // ================================
 
-'use client';
+"use client";
 
-import React from 'react';
-import { ChevronDown, Mail, Download, Github, Linkedin } from 'lucide-react';
-import { Button, Card } from '@/components/ui';
-import { useIntersectionObserver } from '@/hooks';
-import type { HeroSectionProps } from './HeroSection.types';
-import { 
-  MinimalAICTA, 
-  ModernChipCTA, 
-  IconButtonCTA 
-} from '@/components/common/MinimalAICTA/MinimalAICTA';
+import React from "react";
+import { ChevronDown, Mail, Download, Github, Linkedin } from "lucide-react";
+import { Button, Card } from "@/components/ui";
+import { useIntersectionObserver } from "@/hooks";
+import type { HeroSectionProps } from "./HeroSection.types";
+import {
+  MinimalAICTA,
+  ModernChipCTA,
+  IconButtonCTA,
+} from "@/components/common/MinimalAICTA/MinimalAICTA";
 
 export const HeroSection: React.FC<HeroSectionProps> = ({
   personalInfo,
   loading = false,
   onContactClick,
   onDownloadCV,
-  onOpenChat
+  onOpenChat,
 }) => {
   const { ref, isIntersecting } = useIntersectionObserver({
     threshold: 0.5,
-    freezeOnceVisible: true
+    freezeOnceVisible: true,
   });
 
   if (loading) {
     return (
-      <section id="hero" className="min-h-screen flex items-center justify-center">
+      <section
+        id="hero"
+        className="min-h-screen flex items-center justify-center"
+      >
         <div className="text-center">
           <div className="w-16 h-16 border-4 border-cyan-400 border-t-transparent rounded-full animate-spin mx-auto mb-4" />
           <p className="text-gray-400">Loading portfolio...</p>
@@ -39,14 +42,14 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
   }
 
   return (
-    <section 
-      id="hero" 
+    <section
+      id="hero"
       className="min-h-screen flex items-center justify-center relative overflow-hidden pt-20"
-      style={{ minHeight: 'calc(100vh - 0px)' }}
+      style={{ minHeight: "calc(100vh - 0px)" }}
     >
       {/* Background Effects */}
       <div className="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-black to-cyan-900/20" />
-      
+
       {/* Floating Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {[...Array(6)].map((_, i) => (
@@ -57,35 +60,46 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
               animationDelay: `${i * 0.5}s`,
-              animationDuration: `${2 + Math.random() * 2}s`
+              animationDuration: `${2 + Math.random() * 2}s`,
             }}
           />
         ))}
       </div>
-      
-      <div 
+
+      <div
         ref={ref as React.RefObject<HTMLDivElement>}
         className="container mx-auto px-6 text-center z-10 relative"
       >
         <div className="max-w-4xl mx-auto">
           {/* Profile Image */}
-          <div className={`mb-8 transition-all duration-1000 ${
-            isIntersecting ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
-          }`}>
+          <div
+            className={`mb-8 transition-all duration-1000 ${
+              isIntersecting
+                ? "translate-y-0 opacity-100"
+                : "translate-y-10 opacity-0"
+            }`}
+          >
             <div className="w-40 h-40 mx-auto rounded-full bg-gradient-to-r from-cyan-400 to-purple-500 p-1 mb-6 relative shadow-2xl">
               {personalInfo?.profileImage ? (
                 <img
                   src={personalInfo.profileImage}
-                  alt={personalInfo.name || 'Profile'}
+                  alt={personalInfo.name || "Profile"}
                   className="w-full h-full rounded-full object-cover object-center bg-gray-800"
                   onError={(e) => {
                     // Fallback untuk debugging
-                    console.log('Image failed to load:', personalInfo.profileImage);
+                    console.log(
+                      "Image failed to load:",
+                      personalInfo.profileImage,
+                    );
                     const target = e.target as HTMLImageElement;
-                    target.src = 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face';
+                    target.src =
+                      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face";
                   }}
                   onLoad={() => {
-                    console.log('Image loaded successfully:', personalInfo.profileImage);
+                    console.log(
+                      "Image loaded successfully:",
+                      personalInfo.profileImage,
+                    );
                   }}
                 />
               ) : (
@@ -100,23 +114,29 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             </div>
           </div>
 
-         {/* Name & Title - Ukuran Diperkecil */}
-         <div className={`mb-8 transition-all duration-1000 delay-200 ${
-            isIntersecting ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
-          }`}>
+          {/* Name & Title - Ukuran Diperkecil */}
+          <div
+            className={`mb-8 transition-all duration-1000 delay-200 ${
+              isIntersecting
+                ? "translate-y-0 opacity-100"
+                : "translate-y-10 opacity-0"
+            }`}
+          >
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
               <span className="bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 bg-clip-text text-transparent">
-                {personalInfo?.name || 'Muhammad Daffa\' Fisabilillah'}
+                {personalInfo?.name || "Muhammad Daffa' Fisabilillah"}
               </span>
             </h1>
-            
+
             <p className="text-xl md:text-2xl text-gray-300 mb-2 font-light">
-              {personalInfo?.title || 'Senior Full Stack Developer'}
+              {personalInfo?.title || "Senior Full Stack Developer"}
               {personalInfo?.subtitle && (
-                <span className="text-cyan-400 block md:inline md:ml-2">{personalInfo.subtitle}</span>
+                <span className="text-cyan-400 block md:inline md:ml-2">
+                  {personalInfo.subtitle}
+                </span>
               )}
             </p>
-            
+
             {personalInfo?.location && (
               <p className="text-base text-gray-400 flex items-center justify-center gap-2 mt-2">
                 <span>📍</span>
@@ -124,7 +144,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               </p>
             )}
           </div>
-          
+
           {/* Description */}
           {/* <div className={`mb-12 transition-all duration-1000 delay-400 ${
             isIntersecting ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
@@ -137,9 +157,13 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           </div> */}
 
           {/* Action Buttons */}
-          <div className={`flex flex-col sm:flex-row gap-4 justify-center mb-12 transition-all duration-1000 delay-600 ${
-            isIntersecting ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
-          }`}>
+          <div
+            className={`flex flex-col sm:flex-row gap-4 justify-center mb-12 transition-all duration-1000 delay-600 ${
+              isIntersecting
+                ? "translate-y-0 opacity-100"
+                : "translate-y-10 opacity-0"
+            }`}
+          >
             <Button
               variant="primary"
               size="large"
@@ -151,7 +175,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 Get In Touch
               </span>
             </Button>
-            
+
             <Button
               variant="secondary"
               size="large"
@@ -175,9 +199,13 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
 
           {/* Social Links */}
           {personalInfo?.social && (
-            <div className={`flex justify-center gap-4 mb-16 transition-all duration-1000 delay-700 ${
-              isIntersecting ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
-            }`}>
+            <div
+              className={`flex justify-center gap-4 mb-16 transition-all duration-1000 delay-700 ${
+                isIntersecting
+                  ? "translate-y-0 opacity-100"
+                  : "translate-y-10 opacity-0"
+              }`}
+            >
               {personalInfo.social.github && (
                 <a
                   href={personalInfo.social.github}
@@ -185,7 +213,10 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                   rel="noopener noreferrer"
                   className="p-3 bg-gray-800/50 rounded-full hover:bg-cyan-500 transition-all duration-300 hover:scale-110 group"
                 >
-                  <Github className="text-gray-400 group-hover:text-white" size={20} />
+                  <Github
+                    className="text-gray-400 group-hover:text-white"
+                    size={20}
+                  />
                 </a>
               )}
               {personalInfo.social.linkedin && (
@@ -195,16 +226,23 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                   rel="noopener noreferrer"
                   className="p-3 bg-gray-800/50 rounded-full hover:bg-blue-600 transition-all duration-300 hover:scale-110 group"
                 >
-                  <Linkedin className="text-gray-400 group-hover:text-white" size={20} />
+                  <Linkedin
+                    className="text-gray-400 group-hover:text-white"
+                    size={20}
+                  />
                 </a>
               )}
             </div>
           )}
 
           {/* Scroll Indicator */}
-          <div className={`animate-bounce transition-all duration-1000 delay-900 ${
-            isIntersecting ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
-          }`}>
+          <div
+            className={`animate-bounce transition-all duration-1000 delay-900 ${
+              isIntersecting
+                ? "translate-y-0 opacity-100"
+                : "translate-y-10 opacity-0"
+            }`}
+          >
             <ChevronDown size={32} className="mx-auto text-cyan-400" />
             <p className="text-sm text-gray-500 mt-2">Scroll to explore</p>
           </div>
