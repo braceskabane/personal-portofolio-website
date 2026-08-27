@@ -145,7 +145,17 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
                     icon={<Github size={16} />}
                     onClick={() => window.open(data.githubUrl, '_blank')}
                   >
-                    Source Code
+                    {data.githubUrlFrontend ? 'Source Code (Backend)' : 'Source Code'}
+                  </Button>
+                )}
+                {data.githubUrlFrontend && (
+                  <Button
+                    variant="ghost"
+                    size="small"
+                    icon={<Github size={16} />}
+                    onClick={() => window.open(data.githubUrlFrontend, '_blank')}
+                  >
+                    Source Code (Frontend)
                   </Button>
                 )}
                 {data.demoUrl && (

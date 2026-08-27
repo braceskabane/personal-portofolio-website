@@ -26,6 +26,10 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Daffa'" }],
   creator: "Daffa'",
+  icons: {
+    icon: "/icon.png",
+    apple: "/icon.png",
+  },
   openGraph: {
     type: "website",
     locale: "en_US",

@@ -40,29 +40,33 @@ export const getDocumentsByLanguage = (language: PersonalDocument['language']) =
     lastUpdated: new Date('2024-12-01'),
     tags: ['biography', 'background', 'story'],
     content: `
-Muhammad Daffa' Fisabilillah is a Mobile Application Developer specializing in Android development, machine learning integration, and real-time computer vision. 
-He has a proven track record in building end-to-end mobile solutions using Kotlin, MVVM architecture, and modern Android libraries such as Jetpack, CameraX, and Firebase. 
-Daffa is also experienced in deploying lightweight on-device AI models (TensorFlow Lite, ML Kit) and integrating custom CNNs and pose estimation pipelines into mobile applications.
+Muhammad Daffa' Fisabilillah is a Software Developer specializing in frontend and mobile application development, with additional experience in backend development and AI-powered solutions.
+He has a proven track record in building production-ready web applications using React, Next.js, Nuxt.js, TypeScript, and Tailwind CSS, as well as Android applications with Kotlin and Jetpack Compose.
 
 With a GPA of 3.53/4.0 from Institut Teknologi Sepuluh Nopember in Computer Engineering, Daffa has contributed to impactful projects including:
+- **Artisan Inventory**: Full-stack F&B inventory management platform built as KADA Batch 4 capstone, leading a 6-person team as Backend Developer and PM.
+- **AI Running Analytics**: OCR-based running analytics app with Gemini AI training plan generation and Google Calendar sync.
 - **BAKI**: A sport motion detector app using ML Kit Pose Detection API with real-time posture correction.
 - **DogVision**: An offline dog breed classifier using PyTorch and TensorFlow Lite.
 - **Digital Twin for Virtual Music Concert**: A photorealistic avatar system using Unreal Engine 5 and Metahuman.
-- **Playing Card Classification Mini Game**: A terminal-based real-time recognition game using OpenCV and Keras.
 
 Professional experiences include:
+- **Junior Frontend Developer (Internship)** at PT. Kreasi Online Indonesia, developing production-ready web applications using Nuxt.js and TypeScript.
+- **Backend Developer & Product Manager (Bootcamp)** at KADA Batch 4 (Korea-ASEAN Digital Academy), leading a 6-person team to build Artisan Inventory with Node.js, Express, and MongoDB.
 - **Mobile Android Developer** at PT. Adinata Charming Emmanuel, developing a membership-based app with secure authentication, promo systems, and API integration.
-- **Mobile Developer Intern** at Bangkit Academy, focusing on Kotlin, Jetpack Compose, Room database, and TensorFlow Lite integration.
+- **Mobile Application Developer (Cohort)** at Bangkit Academy, focusing on Kotlin, Jetpack Compose, Room database, and TensorFlow Lite integration.
 
 Beyond technical skills, Daffa has served in leadership and organizational roles such as Human Resources Development Staff at HIMATEKKOM ITS and Head of Event Organizer Subdivision for MAGE 9 ITS.
 
 **Technical Skills**:
-- Languages: Kotlin, Java, Python, XML, SQL
-- Frameworks & Libraries: Jetpack Compose, Android Jetpack, Dagger Hilt, PyTorch, TensorFlow Lite, OpenCV, Keras
-- Tools & Platforms: Android Studio, Firebase, Git, CameraX, ML Kit, ONNX
-- Concepts: Clean Architecture (MVVM), Agile (Scrum), On-Device Machine Learning, Real-Time Image Processing, REST API Integration, Material Design
+- Languages: Kotlin, Java, Python, TypeScript, JavaScript, XML, SQL
+- Frontend: React, Next.js, Nuxt.js, Vue.js, Tailwind CSS
+- Backend: Node.js, Express.js, REST APIs, MongoDB, Mongoose
+- Mobile: Android SDK, Jetpack Compose, CameraX, Room Database
+- AI/ML: TensorFlow Lite, ML Kit, PyTorch, OpenCV, Keras, Gemini API
+- Tools: Android Studio, Firebase, Git, Docker, Postman, Android Studio
 
-Daffa is passionate about creating meaningful technology solutions that combine mobile innovation with AI, and enjoys working in cross-functional teams to bring impactful ideas to life.
+Daffa is passionate about creating meaningful technology solutions that combine web and mobile innovation with AI, and enjoys working in cross-functional teams to bring impactful ideas to life.
     `
   },
   {
@@ -248,7 +252,117 @@ BAKI delivers a portable, AI-powered fitness coaching solution that bridges the 
   - Platforms: Web, Android/iOS
     `
   },
-{
+  {
+  id: 'project-artisan-inventory',
+  title: 'Artisan Inventory - F&B Inventory Management System (KADA Capstone)',
+  category: 'projects',
+  language: 'en',
+  lastUpdated: new Date('2026-08-01'),
+  tags: [
+    'full-stack', 'inventory management', 'node.js', 'express', 'mongodb',
+    'capstone project', 'kada', 'korea-asean', 'acid transactions'
+  ],
+  content: `
+  Artisan Inventory is a full-stack F&B inventory management platform built as the capstone project for KADA Batch 4 (Korea-ASEAN Digital Academy). Led a 6-person cross-functional team as Backend Developer and Product Manager.
+
+  PROJECT BACKGROUND:
+  F&B UMKM (small-to-medium businesses) commonly struggle with fragmented inventory management: no real-time visibility into stock levels, no reliable link between raw-material availability and production planning, and no data-driven way to forecast demand or evaluate selling performance.
+
+  KEY FEATURES:
+  1. **6 Core Backend Modules**:
+     - Auth: JWT authentication with email OTP verification
+     - Inventory: Real-time stock tracking with multi-collection transactions
+     - Menu: Menu management with pricing snapshots
+     - Production Plan: Production planning with staleness propagation
+     - Selling: Sales management with frozen-at-approval pricing
+     - Report: Analytics and reporting dashboard
+
+  2. **Atomic ACID Transactions**:
+     - Multi-collection MongoDB transactions for concurrent operations
+     - Eliminated race conditions in sale and production-plan writes
+     - Frozen-at-approval pricing snapshots for historical accuracy
+
+  3. **AI Integration**:
+     - Exposed inventory data to power team's AI chatbot
+     - Natural-language stock and production queries
+     - Forecasting/prediction module built by teammates
+
+  4. **Staleness Propagation**:
+     - Cross-module staleness logic spanning inventory, menu, and batch changes
+     - Multiple stale triggers for data consistency
+
+  TECHNOLOGIES USED:
+  - **Backend**: Node.js, Express, MongoDB, Mongoose, REST APIs, JWT Authentication
+  - **Architecture**: ACID Transactions, Multi-collection Writes, Staleness Propagation, Frozen Pricing Snapshots
+  - **Tools**: Postman, Git, GitHub, Docker
+  - **Methodology**: Agile/Scrum, Cross-functional Team Coordination
+
+  TEAM COMPOSITION:
+  - 2 Frontend developers
+  - 1 Backend Developer & Product Manager (Daffa)
+  - 1 Forecasting/Dashboard developer
+  - 1 AI Chatbot developer
+
+  IMPACT:
+  - Delivered production-ready full-stack inventory platform within 2-month program
+  - Eliminated race conditions through atomic ACID transactions
+  - Preserved historical pricing accuracy via frozen-at-approval snapshots
+  - Enabled natural-language inventory queries via AI chatbot integration
+  - Ranked top 5 in class with 95/100 post-assessment score
+    `
+  },
+  {
+  id: 'project-ai-running-analytics',
+  title: 'AI Running Analytics - OCR-Based Training Insights',
+  category: 'projects',
+  language: 'en',
+  lastUpdated: new Date('2026-08-01'),
+  tags: [
+    'ocr', 'gemini api', 'ai', 'running', 'fitness', 'google calendar',
+    'node.js', 'mongodb', 'training plans'
+  ],
+  content: `
+  AI Running Analytics is a personal running-analytics app that extracts workout data from Huawei Band 11 Pro screenshots via OCR, stores structured records in a database, and uses Gemini AI to generate personalized training reports and plans.
+
+  PROJECT BACKGROUND:
+  Runners who track workouts via wearables often end up with data trapped in disconnected screenshots and app dashboards, with no easy way to turn that raw data into a personalized, actionable training plan or to sync it directly into their calendar.
+
+  KEY FEATURES:
+  1. **OCR Data Extraction**:
+     - Extracts workout metrics: date, title, distance, duration, average pace, speed, heart rate, calories, cadence, stride, steps
+     - Processes Huawei Band 11 Pro screenshots
+     - Stores structured records in MongoDB database
+
+  2. **AI-Powered Training Plans**:
+     - Gemini API integration for personalized training reports
+     - Fitness condition analysis
+     - Pace zone analysis
+     - Weekly training plans based on user goals
+     - Warnings and suggestions based on performance
+
+  3. **Google Calendar Integration**:
+     - One-click sync of training schedule to Google Calendar
+     - Automated event creation for planned workouts
+
+  4. **User-Defined Goals**:
+     - Custom training objectives
+     - Preferred running hours configuration
+     - Personalized plan generation
+
+  TECHNOLOGIES USED:
+  - **Backend**: Node.js, MongoDB, REST APIs
+  - **AI**: Gemini API, OCR processing
+  - **Integrations**: Google Calendar API
+  - **Tools**: Git, GitHub
+
+  IMPACT:
+  - Automated manual logging by extracting structured data directly from wearable screenshots
+  - Generated personalized weekly training plans and pace-zone analysis using Gemini AI
+  - Reduced friction in schedule adoption via one-click Google Calendar sync
+  - Built and shipped independently as a self-initiated project alongside KADA team capstone
+    `
+  },
+  {
   id: 'project-digital-twin',
   title: 'Digital Twin Music Concert using Metahuman Unreal Engine 5',
   category: 'projects',
@@ -316,10 +430,10 @@ BAKI delivers a portable, AI-powered fitness coaching solution that bridges the 
 • **Custom Models**: KNN classifiers, Feature extraction, Model quantization, Performance optimization
 
 **FULL-STACK DEVELOPMENT**
-• **Frontend Technologies**: React 18+, Next.js 14, TypeScript, Tailwind CSS, Framer Motion
+• **Frontend Technologies**: React 18+, Next.js 14, Nuxt.js, Vue.js, TypeScript, Tailwind CSS, Framer Motion
 • **State Management**: Redux Toolkit, Zustand, React Query for server state
-• **Backend Development**: Node.js, Express.js, RESTful APIs, GraphQL, WebSocket implementation
-• **Database Management**: PostgreSQL advanced queries, MongoDB aggregation, Redis caching
+• **Backend Development**: Node.js, Express.js, RESTful APIs, MongoDB, Mongoose, JWT Authentication
+• **Database Management**: MongoDB aggregation, ACID multi-collection transactions, Room Database (Android)
 
 **DEVELOPMENT METHODOLOGIES**
 • **Testing Strategies**: Unit Testing (JUnit, Jest), Integration Testing, UI Testing (Espresso)
@@ -487,38 +601,31 @@ A: "I'm a research-driven learner. I read academic papers, experiment with proof
     priority: 1,
     status: 'published',
     content: `
-Muhammad Daffa' Fisabilillah adalah seorang Mobile Application Developer yang mengkhususkan diri dalam pengembangan Android, integrasi machine learning, dan computer vision real-time.
+Muhammad Daffa' Fisabilillah adalah seorang Software Developer yang mengkhususkan diri dalam pengembangan frontend dan mobile application, dengan pengalaman tambahan dalam backend development dan solusi bertenaga AI.
 
 **KEAHLIAN TEKNIS UTAMA:**
-• **Pengembangan Android**: 5+ tahun pengalaman dengan Kotlin, MVVM Architecture, Clean Architecture
-• **Integrasi AI/ML**: TensorFlow Lite, ML Kit, Custom CNN, Computer Vision dengan OpenCV
-• **Full-Stack Development**: React, Next.js, Node.js, PostgreSQL, TypeScript
-• **Mobile AI**: On-device inference, model optimization, real-time processing
+• **Frontend Development**: React, Next.js, Nuxt.js, Vue.js, TypeScript, Tailwind CSS
+• **Backend Development**: Node.js, Express.js, REST APIs, MongoDB, Mongoose, JWT Authentication
+• **Mobile Development**: Kotlin, Jetpack Compose, Android SDK, CameraX, Room Database
+• **AI/ML Integration**: TensorFlow Lite, ML Kit, PyTorch, OpenCV, Gemini API
 
 **PROYEK UNGGULAN:**
+• **Artisan Inventory**: Platform manajemen inventori F&B full-stack dibangun sebagai capstone KADA Batch 4, memimpin tim 6 orang sebagai Backend Developer dan PM
+• **AI Running Analytics**: Aplikasi analisis lari berbasis OCR dengan Gemini AI untuk generasi training plan dan sinkronisasi Google Calendar
 • **BAKI**: Aplikasi fitness dengan deteksi pose real-time menggunakan ML Kit dan KNN classifier custom
 • **DogVision**: Klasifikasi ras anjing offline menggunakan PyTorch dan TensorFlow Lite
-• **Digital Twin Concert**: Avatar fotorealistik menggunakan Unreal Engine 5 dan Metahuman
-• **Playing Card Game**: Permainan kartu dengan CNN custom untuk recognisi real-time
-
-**PENCAPAIAN AKADEMIK:**
-• IPK 3.53/4.0 dari Institut Teknologi Sepuluh Nopember, Teknik Komputer
-• Lulusan Bangkit Academy dengan fokus mobile development dan TensorFlow
-• Top 15% dari kohort dalam program mobile development
 
 **PENGALAMAN PROFESIONAL:**
+• **Junior Frontend Developer (Internship)** di PT. Kreasi Online Indonesia - Mengembangkan aplikasi web production-ready menggunakan Nuxt.js dan TypeScript
+• **Backend Developer & Product Manager (Bootcamp)** di KADA Batch 4 - Memimpin tim 6 orang membangun Artisan Inventory dengan Node.js, Express, dan MongoDB
 • **Mobile Android Developer** di PT. Adinata Charming Emmanuel - Mengembangkan aplikasi membership dengan autentikasi aman dan sistem promo
-• **Mobile Developer Intern** di Bangkit Academy - Fokus pada Kotlin, Jetpack Compose, dan integrasi TensorFlow Lite
-
-**PENGALAMAN ORGANISASI:**
-• **Staff HRD** HIMATEKKOM ITS - Mengelola pengembangan SDM mahasiswa teknik komputer
-• **Kepala Subdivisi Event Organizer** MAGE 9 ITS - Memimpin tim 15+ orang dalam acara besar
+• **Mobile Application Developer (Cohort)** di Bangkit Academy - Fokus pada Kotlin, Jetpack Compose, dan integrasi TensorFlow Lite
 
 **FILOSOFI PENGEMBANGAN:**
 Saya percaya teknologi harus memberikan dampak nyata bagi kehidupan manusia. Setiap kode yang saya tulis harus memiliki tujuan, setiap fitur harus menyelesaikan masalah nyata, dan setiap aplikasi harus mudah diakses, performa tinggi, dan menyenangkan untuk digunakan.
 
 **KEUNIKAN PENDEKATAN:**
-Saya menggabungkan keahlian mobile development dengan AI/ML untuk menciptakan solusi inovatif. Tidak seperti developer yang fokus hanya pada satu area, saya mengintegrasikan kedua bidang secara seamless untuk menciptakan aplikasi mobile yang intelligent dan impactful.
+Saya menggabungkan keahlian frontend, mobile, dan backend development dengan AI/ML untuk menciptakan solusi inovatif. Tidak hanya fokus pada satu area, saya mengintegrasikan ketiga bidang secara seamless untuk menciptakan aplikasi yang intelligent dan impactful.
     `
   },
   {

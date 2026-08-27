@@ -118,6 +118,77 @@ export class MockPortfolioService implements PortfolioRepository {
         category: "desktop-app",
       },
       {
+        id: "5",
+        title:
+          "Artisan Inventory: F&B Inventory Management System (KADA Capstone)",
+        description:
+          "Full-stack F&B inventory management platform built as the capstone project for KADA Batch 4 (Korea-ASEAN Digital Academy). Led a 6-person cross-functional team as Backend Developer and Product Manager, architecting 6 core backend modules (Auth, Inventory, Menu, Production Plan, Selling, Report) with atomic multi-collection transactions, and exposing inventory data to power the team's AI chatbot for natural-language stock queries and a forecasting/prediction module.",
+        technologies: [
+          "Node.js",
+          "Express",
+          "MongoDB",
+          "Mongoose",
+          "REST APIs",
+          "ACID Transactions",
+          "JWT Authentication",
+          "AI Chatbot Integration",
+        ],
+        imageUrl: "/kada/documentation_presentation.jpg",
+        demoUrl: "/projects/demo-soon?project=artisan-inventory",
+        githubUrl: "https://github.com/505-kada-team/505-capstone-backend.git",
+        githubUrlFrontend:
+          "https://github.com/505-kada-team/505-capstone-frontend.git",
+        videoUrl: "https://youtu.be/WdYSdMegYFM",
+        gallery: [
+          "/kada/documentation_presentation.jpg",
+          "/kada/giving_certification.jpg",
+          "/kada/all_participant.jpg",
+        ],
+        documents: [
+          {
+            label: "Capstone Presentation Deck",
+            url: "/kada/505-Casptone-Prensentation.pdf",
+          },
+          {
+            label: "KADA Batch 4 Certificate",
+            url: "/kada/Certificate_Batch4_035_MuhammadDaffaFisabilillah.pdf",
+          },
+        ],
+        stats: {
+          accuracy: "6 backend modules",
+          dataPoints: "6-person team",
+          performance: "2 months",
+        },
+        featured: true,
+        category: "web-app",
+      },
+      {
+        id: "6",
+        title: "AI Running Analytics: OCR-Based Training Insights",
+        description:
+          "Personal running-analytics app that extracts workout data (pace, heart rate, cadence, stride, calories, etc.) from Huawei Band 11 Pro screenshots via OCR, storing structured records in a database. Integrated Gemini AI to generate personalized training reports, fitness condition analysis, pace zones, and weekly training plans based on imported data and user-defined training goals, with one-click sync to Google Calendar.",
+        technologies: [
+          "Gemini API",
+          "OCR",
+          "Google Calendar API",
+          "Node.js",
+          "MongoDB",
+          "REST APIs",
+        ],
+        imageUrl:
+          "https://images.unsplash.com/photo-1571008887538-b36bb32f4571?w=600&h=400&fit=crop",
+        demoUrl: "/projects/demo-soon?project=running-analytics",
+        githubUrl: undefined,
+        videoUrl: "https://youtu.be/yHVqAgZbS3s",
+        stats: {
+          accuracy: "AI-generated plans",
+          dataPoints: "OCR ingestion",
+          performance: "Self-initiated",
+        },
+        featured: true,
+        category: "web-app",
+      },
+      {
         id: "4",
         title: "Mini Game for Playing Card Classification",
         description:
@@ -164,7 +235,80 @@ export class MockPortfolioService implements PortfolioRepository {
 
     return [
       {
+        id: "0",
+        title: "Full-stack Trainee",
+        description:
+          "Led a 6-person cross-functional team as Backend Developer and PM to build Artisan Inventory, a full-stack F&B inventory management system, during KADA Batch 4 (Korea-ASEAN Digital Academy). Architected the backend across 6 core modules with atomic multi-collection transactions, and independently built an AI-powered running analytics app as a self-initiated project. Completed the full KADA curriculum and ranked top 5 in class with a 95 post-assessment score.",
+        company: "Korea-ASEAN Digital Academy (KADA)",
+        position: "Full-stack Trainee (Bootcamp)",
+        duration: "Jun 2026 – Aug 2026",
+        location: "Indonesia",
+        type: "bootcamp",
+        achievements: [
+          "Led a 6-person cross-functional team as Backend Developer and PM, driving the technical architecture and sprint execution of Artisan Inventory, a full-stack F&B inventory management system",
+          "Built 6 core backend modules (Auth, Inventory, Menu, Production Plan, Selling, Report) using Node.js, Express, and MongoDB, with atomic multi-collection transactions for concurrent operations",
+          "Exposed inventory data to power the team's AI chatbot, enabling natural-language stock and production queries, while a teammate led forecasting and dashboard development",
+          "Independently designed and built an AI-powered running analytics app: OCR data ingestion from Huawei Band 11 Pro screenshots, Gemini API for training-plan generation, and Google Calendar sync",
+          "Completed the full KADA curriculum (Web Development, Backend Development, DevOps & CI/CD, Data Analysis, AI & LLM Applications, UI/UX Design) and ranked top 5 in class with a 95 score on the post-assessment",
+        ],
+        technologies: [
+          "Node.js",
+          "Express",
+          "MongoDB",
+          "Mongoose",
+          "REST APIs",
+          "ACID Transactions",
+          "Gemini API",
+          "OCR",
+          "Google Calendar API",
+        ],
+        links: {
+          githubBackend:
+            "https://github.com/505-kada-team/505-capstone-backend.git",
+          githubFrontend:
+            "https://github.com/505-kada-team/505-capstone-frontend.git",
+          capstoneVideo: "https://youtu.be/WdYSdMegYFM",
+          runningAppVideo: "https://youtu.be/yHVqAgZbS3s",
+          presentationDeck: "/kada/505-Casptone-Prensentation.pdf",
+          certificate:
+            "/kada/Certificate_Batch4_035_MuhammadDaffaFisabilillah.pdf",
+        },
+        gallery: [
+          "/kada/documentation_presentation.jpg",
+          "/kada/giving_certification.jpg",
+          "/kada/all_participant.jpg",
+        ],
+      },
+      {
         id: "1",
+        title: "Junior Frontend Developer",
+        description:
+          "Developed and maintained production-ready web applications using Nuxt.js and TypeScript with a modular component architecture. Integrated multiple RESTful APIs, implemented state management and pagination, and collaborated closely with backend engineers to deliver scalable and responsive user interfaces in an agile development environment.",
+        company: "PT. Kreasi Online Indonesia",
+        position: "Junior Frontend Developer (Internship)",
+        duration: "Dec 2025 – Present",
+        location: "Indonesia",
+        type: "internship",
+        achievements: [
+          "Developed and maintained production-ready web applications using Nuxt.js",
+          "Integrated multiple RESTful APIs across profile, announcement, landing page, and switch user modules",
+          "Implemented state management, pagination, and dynamic rendering to improve performance and user experience",
+          "Collaborated with backend engineers to validate API contracts using Postman",
+          "Contributed to debugging, performance optimization, and deployment workflows within an agile team",
+        ],
+        technologies: [
+          "Nuxt.js",
+          "Vue.js",
+          "TypeScript",
+          "Tailwind CSS",
+          "RESTful APIs",
+          "Postman",
+          "Git",
+          "JavaScript",
+        ],
+      },
+      {
+        id: "2",
         title: "Mobile Android Developer",
         description:
           "Developed a membership-based Android application connecting users with partnered merchants using Kotlin and Clean Architecture (MVVM) for high scalability and maintainability. Collaborated with backend engineers to ensure seamless integration with RESTful APIs.",
@@ -192,8 +336,8 @@ export class MockPortfolioService implements PortfolioRepository {
         ],
       },
       {
-        id: "2",
-        title: "Mobile Application Developer (Internship)",
+        id: "3",
+        title: "Mobile Application Developer (Cohort)",
         description:
           "Completed a 20-week career readiness program led by Google, GoTo, and Traveloka, focused on industry-level mobile development. Built Android applications using modern technologies and contributed to cross-functional teams.",
         company: "Bangkit Academy",
@@ -311,6 +455,27 @@ export class MockPortfolioService implements PortfolioRepository {
         description: "Backend services and authentication",
       },
 
+      // Backend (KADA)
+      {
+        name: "Node.js",
+        projectCount: 2,
+        category: "Backend",
+        description:
+          "Backend runtime for Artisan Inventory and running analytics app",
+      },
+      {
+        name: "Express",
+        projectCount: 2,
+        category: "Backend",
+        description: "REST API framework for KADA capstone backend",
+      },
+      {
+        name: "MongoDB",
+        projectCount: 2,
+        category: "Database",
+        description: "Primary database with ACID multi-collection transactions",
+      },
+
       // Machine Learning & AI
       {
         name: "TensorFlow Lite",
@@ -341,6 +506,12 @@ export class MockPortfolioService implements PortfolioRepository {
         projectCount: 1,
         category: "Backend",
         description: "Deep learning model training",
+      },
+      {
+        name: "Gemini API",
+        projectCount: 1,
+        category: "Backend",
+        description: "AI-generated training plans in running analytics app",
       },
 
       // Game Development & 3D
@@ -410,11 +581,11 @@ export class MockPortfolioService implements PortfolioRepository {
 
     return {
       name: "Muhammad Daffa' Fisabilillah",
-      title: "Computer Engineering Student in",
+      title: "Fresh Graduate of Computer Engineering in",
       subtitle: "ITS University",
       description:
-        "Mobile Application Developer with strong foundations in Android development, machine learning integration, and real-time computer vision. Experienced in building end-to-end mobile solutions using Kotlin, MVVM architecture, and modern Android libraries including Jetpack, CameraX, and Firebase. Proficient in deploying lightweight on-device AI models (TFLite, ML Kit) and working with custom CNNs and pose estimation pipelines. Demonstrated ability to work in cross-functional teams and lead student-led projects and organizations.",
-      profileImage: "/images/Davis_Metahuman.png",
+        "Software Developer specializing in frontend and mobile application development. Experienced in building production-ready web applications using React, Next.js, Nuxt.js, TypeScript, and Tailwind CSS, as well as Android applications with Kotlin and Jetpack Compose. Skilled in scalable architecture, REST API integration, Clean Architecture, and agile development, with additional experience in AI-powered mobile solutions and real-time computer vision.",
+      profileImage: "/images/Davis_Photo.PNG",
       email: "mydaffa2003@gmail.com",
       phone: "+62 822 8924 7001",
       location: "Jakarta, Indonesia",

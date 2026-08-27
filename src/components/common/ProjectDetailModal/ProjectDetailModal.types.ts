@@ -28,6 +28,8 @@ export interface ProjectDetailData {
     tools?: string[];
     deployment?: string[];
     concepts?: string[];
+    ai?: string[];
+    integrations?: string[];
   };
   
   // Media
@@ -57,6 +59,7 @@ export interface ProjectDetailData {
   
   // Links
   githubUrl?: string;
+  githubUrlFrontend?: string;
   demoUrl?: string;
   documentationUrl?: string;
 }
