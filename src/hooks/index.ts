@@ -12,6 +12,8 @@ export { useLocalStorage } from './useLocalStorage';
 export { useActiveSection } from './useActiveSection';
 export { usePortfolio } from './usePortfolio';
 export { useMultilingualChatBot } from './useChatBot';
+// NOTE: useProjectDetail is imported directly to avoid circular dependency issues
+// export { useProjectDetail } from './useProjectDetail';
 
 // Export types
 export type { MousePosition } from './useMousePosition';

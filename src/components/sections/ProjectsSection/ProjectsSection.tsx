@@ -4,13 +4,20 @@
 
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Github, ExternalLink, Filter, Grid, List } from 'lucide-react';
 import { Button, Card } from '@/components/ui';
 import { useIntersectionObserver } from '@/hooks';
+// Use new hook name to avoid cache issues
+import { useModalDetail } from '@/hooks/useModalDetail';
+import { ProjectDetailModal } from '@/components/common/ProjectDetailModal';
 import type { ProjectsSectionProps, ProjectCardProps } from './ProjectsSection.types';
 
-const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
+const ProjectCard: React.FC<ProjectCardProps & { onDetailClick: (id: string) => void }> = ({ 
+  project, 
+  index,
+  onDetailClick 
+}) => {
   const [isVisible, setIsVisible] = useState(false);
 
   // Use useEffect untuk intersection observer manual
@@ -24,12 +31,13 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
 
   return (
     <Card
-      className={`group overflow-hidden transition-all duration-1000 ${
+      className={`group overflow-hidden transition-all duration-1000 cursor-pointer ${
         isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
       }`}
       variant="elevated"
       padding="none"
       hover
+      onClick={() => onDetailClick(project.id)}
     >
       {/* Project Image */}
       <div className="relative overflow-hidden h-48 sm:h-56">
@@ -138,6 +146,8 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
     freezeOnceVisible: true
   });
 
+  const { isOpen, currentProject, loading: detailLoading, openDetail, closeDetail } = useModalDetail();
+
   const [filter, setFilter] = useState<string>('all');
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
 
@@ -155,6 +165,11 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
   const handleViewModeChange = React.useCallback((mode: 'grid' | 'list') => {
     setViewMode(mode);
   }, []);
+
+  // Handle project detail click
+  const handleProjectClick = useCallback((projectId: string) => {
+    openDetail(projectId, 'project');
+  }, [openDetail]);
 
   if (loading) {
     return (
@@ -180,8 +195,9 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
   }
 
   return (
-    <section id="projects" ref={ref} className="py-20 relative">
-      <div className="container mx-auto px-6">
+    <>
+      <section id="projects" ref={ref} className="py-20 relative">
+        <div className="container mx-auto px-6">
         {/* Section Header */}
         <div className={`text-center mb-16 transition-all duration-1000 ${
           isIntersecting ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
@@ -261,7 +277,12 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
             : 'grid-cols-1 max-w-4xl mx-auto'
         }`}>
           {filteredProjects.map((project, index) => (
-            <ProjectCard key={project.id} project={project} index={index} />
+            <ProjectCard 
+              key={project.id} 
+              project={project} 
+              index={index}
+              onDetailClick={handleProjectClick}
+            />
           ))}
         </div>
 
@@ -291,7 +312,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
               variant="primary"
               fullWidth
               icon={<Github size={20} />}
-              onClick={() => window.open('https://github.com/johndoe', '_blank')}
+              onClick={() => window.open('https://github.com/braceskabane', '_blank')}
             >
               View All Projects
             </Button>
@@ -299,5 +320,14 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
         </div>
       </div>
     </section>
+
+    {/* Project Detail Modal */}
+    <ProjectDetailModal
+      isOpen={isOpen}
+      onClose={closeDetail}
+      data={currentProject}
+      loading={detailLoading}
+    />
+  </>
   );
 };

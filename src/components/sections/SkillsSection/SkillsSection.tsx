@@ -19,11 +19,11 @@ const SkillCard: React.FC<SkillCardProps> = ({ skill, index }) => {
     return () => clearTimeout(timer);
   }, [index]);
 
-  const getSkillColor = (level: number) => {
-    if (level >= 90) return 'from-green-400 to-emerald-500';
-    if (level >= 80) return 'from-blue-400 to-cyan-500';
-    if (level >= 70) return 'from-yellow-400 to-orange-500';
-    return 'from-red-400 to-pink-500';
+  const getSkillColor = (projectCount: number) => {
+    if (projectCount >= 3) return 'from-green-400 to-emerald-500';
+    if (projectCount >= 2) return 'from-blue-400 to-cyan-500';
+    if (projectCount >= 1) return 'from-yellow-400 to-orange-500';
+    return 'from-gray-400 to-gray-500';
   };
 
   const getSkillIcon = (category: string) => {
@@ -41,6 +41,9 @@ const SkillCard: React.FC<SkillCardProps> = ({ skill, index }) => {
       default: return '🛠️';
     }
   };
+
+  const maxProjects = 4; // Based on total projects
+  const progressPercentage = (skill.projectCount / maxProjects) * 100;
 
   return (
     <Card
@@ -64,19 +67,19 @@ const SkillCard: React.FC<SkillCardProps> = ({ skill, index }) => {
           </div>
         </div>
         <div className="text-right">
-          <div className="text-2xl font-bold text-cyan-400">{skill.level}%</div>
-          {skill.yearsOfExperience && (
-            <div className="text-xs text-gray-400">{skill.yearsOfExperience}y exp</div>
-          )}
+          <div className="text-2xl font-bold text-cyan-400">{skill.projectCount}</div>
+          <div className="text-xs text-gray-400">
+            {skill.projectCount === 1 ? 'project' : 'projects'}
+          </div>
         </div>
       </div>
       
       {/* Progress Bar */}
       <div className="relative h-3 bg-gray-700 rounded-full overflow-hidden">
         <div
-          className={`absolute top-0 left-0 h-full bg-gradient-to-r ${getSkillColor(skill.level)} rounded-full transition-all duration-2000 ease-out`}
+          className={`absolute top-0 left-0 h-full bg-gradient-to-r ${getSkillColor(skill.projectCount)} rounded-full transition-all duration-2000 ease-out`}
           style={{
-            width: isVisible ? `${skill.level}%` : '0%',
+            width: isVisible ? `${Math.max(progressPercentage, 10)}%` : '0%',
             transitionDelay: `${index * 100}ms`
           } as React.CSSProperties}
         />
@@ -214,7 +217,7 @@ export const SkillsSection: React.FC<SkillsSectionProps> = ({
                 </h3>
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                   {categorySkills
-                    .sort((a, b) => b.level - a.level)
+                    .sort((a, b) => b.projectCount - a.projectCount)
                     .map((skill, index) => (
                       <SkillCard key={skill.name} skill={skill} index={index} />
                     ))}
@@ -226,7 +229,7 @@ export const SkillsSection: React.FC<SkillsSectionProps> = ({
           // Show filtered skills in grid
           <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {filteredSkills
-              .sort((a, b) => b.level - a.level)
+              .sort((a, b) => b.projectCount - a.projectCount)
               .map((skill, index) => (
                 <SkillCard key={skill.name} skill={skill} index={index} />
               ))}
@@ -247,17 +250,17 @@ export const SkillsSection: React.FC<SkillsSectionProps> = ({
             <Card variant="glass" padding="large" className="text-center">
               <TrendingUp className="text-purple-400 mb-4 mx-auto" size={32} />
               <h3 className="text-2xl font-bold text-white mb-2">
-                {Math.round(skills.reduce((acc, skill) => acc + skill.level, 0) / skills.length)}%
+                {Math.round(skills.reduce((acc, skill) => acc + skill.projectCount, 0) / skills.length * 10) / 10}
               </h3>
-              <p className="text-gray-400">Average Proficiency</p>
+              <p className="text-gray-400">Average Projects per Skill</p>
             </Card>
             
             <Card variant="glass" padding="large" className="text-center">
               <Award className="text-yellow-400 mb-4 mx-auto" size={32} />
               <h3 className="text-2xl font-bold text-white mb-2">
-                {skills.filter(s => s.level >= 90).length}
+                {skills.filter(s => s.projectCount >= 2).length}
               </h3>
-              <p className="text-gray-400">Expert Level Skills</p>
+              <p className="text-gray-400">Multi-Project Skills</p>
             </Card>
           </div>
         </div>

@@ -1,3 +1,19 @@
+<<<<<<< HEAD
+# Dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Next.js
+.next/
+out/
+build/
+dist/
+
+# Environment variables
+=======
 # ================================
 # .gitignore - WAJIB DIBUAT!
 # ================================
@@ -93,16 +109,23 @@ jspm_packages/
 .yarn-integrity
 
 # Environment Files - JANGAN DI-PUSH!
+>>>>>>> 0dd4ecd1896764da734e1dc75aae488148f45f1b
 .env
 .env.local
 .env.development.local
 .env.test.local
 .env.production.local
+<<<<<<< HEAD
+=======
 .env.production
+>>>>>>> 0dd4ecd1896764da734e1dc75aae488148f45f1b
 
 # Vercel
 .vercel
 
+<<<<<<< HEAD
+# IDE
+=======
 # Storybook build outputs
 /storybook-static
 
@@ -111,11 +134,40 @@ tmp/
 temp/
 
 # Editor directories and files
+>>>>>>> 0dd4ecd1896764da734e1dc75aae488148f45f1b
 .vscode/
 .idea/
 *.swp
 *.swo
 
+<<<<<<< HEAD
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Database
+*.db
+*.sqlite
+
+# Cache
+.cache/
+
+# Temporary files
+*.tmp
+*.temp
+
+# Build artifacts
+*.tsbuildinfo
+
+# Large files backup (already moved to Google Drive)
+large-files-backup/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+=======
 # OS generated files
 .DS_Store
 .DS_Store?
@@ -130,3 +182,4 @@ Thumbs.db
 
 # Sentry Config File
 .sentryclirc
+>>>>>>> 0dd4ecd1896764da734e1dc75aae488148f45f1b

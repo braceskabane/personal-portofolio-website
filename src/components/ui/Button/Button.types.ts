@@ -21,7 +21,7 @@ export type ButtonSize =
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: ButtonVariant;
   size?: ButtonSize;
-  children: React.ReactNode;
+  children?: React.ReactNode; // ← MADE OPTIONAL for icon-only buttons
   icon?: React.ReactNode;
   iconPosition?: 'left' | 'right';
   fullWidth?: boolean;

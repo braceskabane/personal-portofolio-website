@@ -4,10 +4,13 @@
 
 'use client';
 
-import React from 'react';
+import React, { useCallback } from 'react';
 import { Briefcase, MapPin, Calendar, Star } from 'lucide-react';
 import { Card } from '@/components/ui';
 import { useIntersectionObserver } from '@/hooks';
+// Use new hook name to avoid cache issues
+import { useModalDetail } from '@/hooks/useModalDetail';
+import { ProjectDetailModal } from '@/components/common/ProjectDetailModal';
 import type { ExperienceSectionProps } from './ExperienceSection.types';
 
 export const ExperienceSection: React.FC<ExperienceSectionProps> = ({
@@ -19,6 +22,13 @@ export const ExperienceSection: React.FC<ExperienceSectionProps> = ({
     threshold: 0.2,
     freezeOnceVisible: true
   });
+
+  const { isOpen, currentProject, loading: detailLoading, openDetail, closeDetail } = useModalDetail();
+
+  // Handle experience detail click
+  const handleExperienceClick = useCallback((experienceId: string) => {
+    openDetail(experienceId, 'experience');
+  }, [openDetail]);
 
   if (loading) {
     return (
@@ -44,10 +54,11 @@ export const ExperienceSection: React.FC<ExperienceSectionProps> = ({
   }
 
   return (
-    <section 
-      id="experience" 
-      className="py-20 relative"
-    >
+    <>
+      <section 
+        id="experience" 
+        className="py-20 relative"
+      >
       <div 
         ref={ref as React.RefObject<HTMLDivElement>}
         className="container mx-auto px-6"
@@ -86,7 +97,8 @@ export const ExperienceSection: React.FC<ExperienceSectionProps> = ({
                   variant="elevated" 
                   padding="large"
                   hover
-                  className="group hover:scale-105 transition-all duration-300"
+                  className="group hover:scale-105 transition-all duration-300 cursor-pointer"
+                  onClick={() => handleExperienceClick(exp.id)}
                 >
                   {/* Company & Position */}
                   <div className="mb-4">
@@ -176,5 +188,14 @@ export const ExperienceSection: React.FC<ExperienceSectionProps> = ({
         </div>
       </div>
     </section>
+
+    {/* Experience Detail Modal */}
+    <ProjectDetailModal
+      isOpen={isOpen}
+      onClose={closeDetail}
+      data={currentProject}
+      loading={detailLoading}
+    />
+  </>
   );
 };

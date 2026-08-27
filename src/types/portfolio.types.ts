@@ -15,6 +15,10 @@ export interface Project extends PortfolioItem {
   imageUrl: string;
   demoUrl?: string;
   githubUrl?: string;
+  githubUrlFrontend?: string;
+  videoUrl?: string;
+  gallery?: (string | ProjectGalleryItem)[];
+  documents?: ProjectDocument[];
   stats: ProjectStats;
   featured?: boolean;
   category?: ProjectCategory;
@@ -40,7 +44,29 @@ export type ProjectCategory =
   | 'library' 
   | 'tool';
 
+export interface ProjectGalleryItem {
+  id: string;
+  url?: string;
+  videoUrl?: string;
+  caption: string;
+  type: 'screenshot' | 'diagram' | 'demo' | 'video';
+}
+
+export interface ProjectDocument {
+  label: string;
+  url: string;
+}
+
 // Experience interface
+export interface ExperienceLinks {
+  githubBackend?: string;
+  githubFrontend?: string;
+  capstoneVideo?: string;
+  runningAppVideo?: string;
+  presentationDeck?: string;
+  certificate?: string;
+}
+
 export interface Experience extends PortfolioItem {
   company: string;
   position: string;
@@ -49,6 +75,8 @@ export interface Experience extends PortfolioItem {
   technologies: string[];
   location?: string;
   type?: EmploymentType;
+  links?: ExperienceLinks;
+  gallery?: string[];
 }
 
 export type EmploymentType = 
@@ -56,16 +84,16 @@ export type EmploymentType =
   | 'part-time' 
   | 'contract' 
   | 'freelance' 
-  | 'internship';
+  | 'internship'
+  | 'bootcamp';
 
 // Skill interface
 export interface Skill {
   name: string;
-  level: number; // 0-100
+  projectCount: number; // Number of projects using this skill
   category: SkillCategory;
   icon?: string;
   description?: string;
-  yearsOfExperience?: number;
 }
 
 export type SkillCategory = 

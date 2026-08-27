@@ -50,27 +50,27 @@ class MockPortfolioService {
   async getSkills() {
     await this.delay(400);
     return [
-      { name: 'React.js', level: 95, category: 'Frontend' as const },
-      { name: 'Next.js', level: 90, category: 'Frontend' as const },
-      { name: 'TypeScript', level: 88, category: 'Language' as const },
-      { name: 'Node.js', level: 85, category: 'Backend' as const }
+      { name: 'React.js', projectCount: 2, category: 'Frontend' as const },
+      { name: 'Next.js', projectCount: 1, category: 'Frontend' as const },
+      { name: 'TypeScript', projectCount: 2, category: 'Language' as const },
+      { name: 'Node.js', projectCount: 1, category: 'Backend' as const }
     ];
   }
 
   async getPersonalInfo() {
     await this.delay(300);
     return {
-      name: 'John Doe',
-      title: 'Senior Full Stack Developer',
-      subtitle: '& UI/UX Designer',
-      description: 'Passionate about creating scalable solutions.',
-      profileImage: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face',
-      email: 'john.doe@example.com',
-      phone: '+1 (555) 123-4567',
-      location: 'San Francisco, CA',
+      name: 'Muhammad Daffa\' Fisabilillah',
+      title: 'Mobile Application Developer',
+      subtitle: 'Android & Machine Learning Specialist',
+      description: 'Mobile Application Developer with strong foundations in Android development and machine learning.',
+      profileImage: '/images/Davis_Metahuman.png',
+      email: 'mydaffa2003@gmail.com',
+      phone: '+62 822 8924 7001',
+      location: 'Surabaya, Indonesia',
       social: {
-        github: 'https://github.com/johndoe',
-        linkedin: 'https://linkedin.com/in/johndoe'
+        github: 'https://github.com/braceskabane',
+        linkedin: 'https://linkedin.com/in/muhammaddaffafisabilillah'
       }
     };
   }

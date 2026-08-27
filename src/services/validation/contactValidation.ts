@@ -4,7 +4,8 @@
 
 'use client';
 
-import type { ContactForm, Country } from '@/types';
+import type { Country, ContactForm as ContactFormFrontend } from '@/types';
+import type { ContactFormData } from '@/services/api/contactService';
 
 export interface ValidationRule {
   required?: boolean;
@@ -114,7 +115,7 @@ export class ContactValidationService {
     }
   ];
 
-  private rules: Record<keyof ContactForm, ValidationRule[]> = {
+  private rules: Record<keyof ContactFormFrontend, ValidationRule[]> = {
     name: [
       { required: true },
       { minLength: 2 },
@@ -352,12 +353,12 @@ export class ContactValidationService {
   }
 
   // ✅ Enhanced validation with country support
-  validate(data: ContactForm): ValidationResult {
+  validate(data: ContactFormFrontend): ValidationResult {
     const errors: Record<string, string> = {};
     const country = data.country ? this.getCountryByCode(data.country) : undefined;
 
     Object.entries(this.rules).forEach(([field, rules]) => {
-      const value = data[field as keyof ContactForm];
+      const value = data[field as keyof ContactFormFrontend];
       
       rules.forEach(rule => {
         // Required validation
@@ -409,7 +410,7 @@ export class ContactValidationService {
   }
 
   // ✅ Enhanced field validation with country support
-  validateField(field: keyof ContactForm, value: any, countryCode?: string): string | null {
+  validateField(field: keyof ContactFormFrontend, value: any, countryCode?: string): string | null {
     const rules = this.rules[field];
     if (!rules) return null;
 

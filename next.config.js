@@ -4,7 +4,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     experimental: {
-      optimizeCss: true,
+      // Disable optimizeCss for deployment
+      // optimizeCss: true,
     },
     images: {
       domains: ['images.unsplash.com', 'unsplash.com'],

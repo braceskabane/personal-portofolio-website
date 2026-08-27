@@ -3,22 +3,28 @@
 // ================================
 
 // API Services
-export { HttpClient } from './api/httpClient';
-export type { ApiClient, RequestConfig } from './api/httpClient';
+export { HttpClient } from "./api/httpClient";
+export type { ApiClient, RequestConfig } from "./api/httpClient";
 
 // Portfolio Services
-export { MockPortfolioService } from './portfolio/mockPortfolioService';
-export { PortfolioService } from './portfolio/portfolioService';
-export type { PortfolioRepository } from './portfolio/portfolioService';
+export { MockPortfolioService } from "./portfolio/mockPortfolioService";
+export { PortfolioService } from "./portfolio/portfolioService";
+export type { PortfolioRepository } from "./portfolio/portfolioService";
 
 // Animation Services
-export { ParticleService } from './animation/particleService';
-export type { Particle, ParticleSystemConfig } from './animation/particleService';
+export { ParticleService } from "./animation/particleService";
+export type {
+  Particle,
+  ParticleSystemConfig,
+} from "./animation/particleService";
 
 // Validation Services
-export { ContactValidationService } from './validation/contactValidation';
-export type { ValidationRule, ValidationResult } from './validation/contactValidation';
+export { ContactValidationService } from "./validation/contactValidation";
+export type {
+  ValidationRule,
+  ValidationResult,
+} from "./validation/contactValidation";
 
 // AI Services
-export { EnhancedGeminiService } from './ai/geminiService';
-export type { GeminiConfig } from './ai/geminiService';
+export { EnhancedGeminiService } from "./ai/geminiService";
+export type { GeminiConfig } from "./ai/geminiService";
