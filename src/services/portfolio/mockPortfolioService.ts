@@ -589,7 +589,7 @@ export class MockPortfolioService implements PortfolioRepository {
       email: "mydaffa2003@gmail.com",
       phone: "+62 822 8924 7001",
       location: "Jakarta, Indonesia",
-      website: "https://dav-portofolio.vercel.app",
+      website: "braceskabane.netlify.app",
       resume: "/resume-daffa-fisabilillah.pdf",
       social: {
         github: "https://github.com/braceskabane",

@@ -19,8 +19,8 @@ export const ExperienceSection: React.FC<ExperienceSectionProps> = ({
   error,
 }) => {
   const { ref, isIntersecting } = useIntersectionObserver({
-    threshold: 0.05,
-    rootMargin: '100px',
+    threshold: 0.1,
+    rootMargin: "100px",
     freezeOnceVisible: true,
   });
 
