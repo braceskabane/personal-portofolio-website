@@ -4,7 +4,7 @@
 
 'use client';
 
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 import { Github, ExternalLink, Filter, Grid, List } from 'lucide-react';
 import { Button, Card } from '@/components/ui';
 import { useIntersectionObserver } from '@/hooks';
@@ -13,32 +13,31 @@ import { useModalDetail } from '@/hooks/useModalDetail';
 import { ProjectDetailModal } from '@/components/common/ProjectDetailModal';
 import type { ProjectsSectionProps, ProjectCardProps } from './ProjectsSection.types';
 
-const ProjectCard: React.FC<ProjectCardProps & { onDetailClick: (id: string) => void }> = ({ 
+interface ProjectCardExtendedProps extends ProjectCardProps {
+  onDetailClick: (id: string) => void;
+  isSectionVisible: boolean;
+}
+
+const ProjectCard: React.FC<ProjectCardExtendedProps> = ({ 
   project, 
   index,
-  onDetailClick 
+  onDetailClick,
+  isSectionVisible
 }) => {
-  const [isVisible, setIsVisible] = useState(false);
-
-  // Use useEffect untuk intersection observer manual
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsVisible(true);
-    }, index * 100);
-
-    return () => clearTimeout(timer);
-  }, [index]);
-
   return (
-    <Card
-      className={`group overflow-hidden transition-all duration-1000 cursor-pointer ${
-        isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
+    <div
+      className={`transition-all duration-500 md:duration-700 ${
+        isSectionVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
       }`}
-      variant="elevated"
-      padding="none"
-      hover
-      onClick={() => onDetailClick(project.id)}
+      style={{ transitionDelay: isSectionVisible ? `${index * 100}ms` : '0ms' }}
     >
+      <Card
+        className="group overflow-hidden cursor-pointer"
+        variant="elevated"
+        padding="none"
+        hover
+        onClick={() => onDetailClick(project.id)}
+      >
       {/* Project Image */}
       <div className="relative overflow-hidden h-48 sm:h-56">
         <img
@@ -133,6 +132,7 @@ const ProjectCard: React.FC<ProjectCardProps & { onDetailClick: (id: string) => 
         </div>
       </div>
     </Card>
+    </div>
   );
 };
 
@@ -282,6 +282,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
               project={project} 
               index={index}
               onDetailClick={handleProjectClick}
+              isSectionVisible={isIntersecting}
             />
           ))}
         </div>
@@ -298,14 +299,16 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
         )}
 
         {/* View More Projects */}
-        <div className={`text-center mt-16 transition-all duration-1000 delay-1000 ${
+        <div className={`text-center mt-10 md:mt-16 transition-all duration-500 md:duration-1000 ${
           isIntersecting ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
-        }`}>
+        }`}
+          style={{ transitionDelay: isIntersecting ? '600ms' : '0ms' }}
+        >
           <Card variant="glass" padding="large" className="inline-block">
-            <h3 className="text-2xl font-bold text-white mb-4">
+            <h3 className="text-xl md:text-2xl font-bold text-white mb-4">
               Interested in More?
             </h3>
-            <p className="text-gray-300 mb-6 max-w-md">
+            <p className="text-gray-300 mb-6 max-w-md text-sm md:text-base">
               Check out my GitHub for more projects and open source contributions.
             </p>
             <Button

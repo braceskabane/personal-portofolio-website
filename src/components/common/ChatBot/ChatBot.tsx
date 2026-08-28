@@ -128,13 +128,17 @@ const MultilingualChatBot: React.FC<MultilingualChatBotProps> = ({
 
   return (
     <div
-      className={`fixed inset-0 md:bottom-6 md:right-6 md:inset-auto z-[60] ${className}`}
+      className={`fixed z-[60] ${
+        isOpen
+          ? "inset-8 md:inset-auto md:bottom-6 md:right-6 md:w-96 md:h-[600px]"
+          : "hidden"
+      } ${className}`}
       data-chatbot
     >
       <Card
         variant="default"
         padding="none"
-        className="w-full h-full md:w-96 md:h-[600px] md:max-h-[80vh] flex flex-col shadow-2xl shadow-cyan-500/10 border-cyan-400/20 md:rounded-lg rounded-none"
+        className="w-full h-full flex flex-col shadow-2xl shadow-cyan-500/10 border border-cyan-400/20 rounded-2xl md:rounded-lg"
       >
         {/* Header with Language Selector */}
         <div className="flex items-center justify-between p-3 md:p-4 border-b border-gray-700 bg-gradient-to-r from-cyan-500/10 to-purple-500/10">

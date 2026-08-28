@@ -68,7 +68,7 @@ export default function DemoSoonPage() {
 
         {/* Action Buttons */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-          <Link href="/portofolio">
+          <Link href="/portfolio">
             <Button 
               variant="secondary"
               className="bg-white/10 hover:bg-white/20 text-white border-white/20 hover:border-white/30 transition-all duration-300"
